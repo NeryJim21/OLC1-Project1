@@ -1,0 +1,26 @@
+EXREGAN
+
+Gramatica:
+
+Comentarios multilinea: <! comentario !>
+Comentario unilinea: // Comentario
+
+{
+// comentario
+CONJ: nombre_conjunto -> notacion;
+tld -> expresion_regular_en_prefijo;
+
+%%
+
+tld:"Lexema de enrada";
+tld: "Otro lexema de entrada";
+
+}
+
+Caracteres especiales:
+
+\n - Salto de línea
+\' - Comilla Simple
+\" - Comilla doble
+
+
