@@ -1,0 +1,29 @@
+/*
+* ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1 SECCIÓN C
+* PROYECTO 1 - EXREGAN
+* PRIMER SEMESTRE 2023
+* NERY JIMÉNEZ - 201700381
+*/
+
+package analizador;
+import java_cup.runtime.*;
+
+parser code
+{:
+    //codigo en java
+:}
+
+terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER,LLAVDER,LLAVIZQ;
+terminal String MAS,MENOS,POR,DIV;
+terminal String ENTERO, DECIMAL, CADENA, ID;
+terminal String PR_CONJ;
+
+non terminal ini, cuerpo;
+
+start with ini;
+
+ini ::= LLAVIZQ cuerpo LLAVDER;
+
+cuerpo ::= ID
+                | ENTERO
+;

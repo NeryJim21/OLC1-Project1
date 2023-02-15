@@ -1,19 +1,26 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+* ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1 SECCIÓN C
+* PROYECTO 1 - EXREGAN
+* PRIMER SEMESTRE 2023
+* NERY JIMÉNEZ - 201700381
+*/
 
-/**
- *
- * @author n21
- */
+import java.io.StringReader;
+import java.util.ArrayList;
+
 public class interfazExRegan extends javax.swing.JFrame {
-
+    //Variables para el proyecto
+    public static String listaItems = "";
     /**
      * Creates new form interfazExRegan
      */
     public interfazExRegan() {
         initComponents();
+    }
+    
+    //Obtener items
+    public static String getListaItems(){
+        return listaItems;
     }
 
     /**
@@ -55,6 +62,11 @@ public class interfazExRegan extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtArchivo);
 
         btnGenerarAutomata.setText("Generar Autómata");
+        btnGenerarAutomata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarAutomataActionPerformed(evt);
+            }
+        });
 
         btnAnalizarEntrada.setText("Analizar Entrada");
 
@@ -173,6 +185,13 @@ public class interfazExRegan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Botón Generar autómata
+    private void btnGenerarAutomataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarAutomataActionPerformed
+        // TODO add your handling code here:
+        analizar();
+        
+    }//GEN-LAST:event_btnGenerarAutomataActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +227,20 @@ public class interfazExRegan extends javax.swing.JFrame {
         });
     }
 
+    //Metodo para analizar
+    public void analizar(){
+        listaItems = "";
+        
+        try{
+            String path = txtArchivo.getText();
+            analizador.Parser Sintactico;
+            Sintactico = new analizador.Parser(new analizador.Lexer(new StringReader(path)));
+            Sintactico.parse();
+            txtConsola.setText("Item analizado: "+listaItems);
+        }catch(Exception e){
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnalizarEntrada;
     private javax.swing.JButton btnAnterior;

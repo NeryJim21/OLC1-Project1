@@ -163,6 +163,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Generar Aut&#xf3;mata"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerarAutomataActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAnalizarEntrada">
       <Properties>
