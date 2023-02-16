@@ -43,6 +43,7 @@ MULTILINEA = "<!""<"*([^*<]|[^*]"!"|"*"[^!])*"*"*"!>"
 {MULTILINEA}  {}
 {UNILINEA} {}
 
+":" { System.out.println("Reconocio "+yytext()+" dos puntos"); return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext());} 
 ";" { System.out.println("Reconocio "+yytext()+" punto y coma"); return new Symbol(sym.PTCOMA, yyline, yychar, yytext());} 
 "(" { System.out.println("Reconocio "+yytext()+" parentesis abre"); return new Symbol(sym.PARIZQ, yyline, yychar, yytext());} 
 ")" { System.out.println("Reconocio "+yytext()+" parentesis cierra"); return new Symbol(sym.PARDER, yyline, yychar, yytext());} 
@@ -55,6 +56,11 @@ MULTILINEA = "<!""<"*([^*<]|[^*]"!"|"*"[^!])*"*"*"!>"
 "-" {return new Symbol(sym.MENOS, yyline, yychar, yytext());} 
 "*" {return new Symbol(sym.POR, yyline, yychar, yytext());} 
 "/" {return new Symbol(sym.DIV, yyline, yychar, yytext());} 
+"->" {return new Symbol(sym.FLECHA, yyline, yychar, yytext());}
+"~" {return new Symbol(sym.COLOCHO, yyline, yychar, yytext());}
+"." {return new Symbol(sym.PUNTO, yyline, yychar, yytext());} 
+
+"|" {return new Symbol(sym.OR, yyline, yychar, yytext());}
 
 \n {yychar=1;}
 

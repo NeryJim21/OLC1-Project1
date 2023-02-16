@@ -13,17 +13,42 @@ parser code
     //codigo en java
 :}
 
-terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER,LLAVDER,LLAVIZQ;
+terminal String DOSPUNTOS, PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER,LLAVDER,LLAVIZQ;
 terminal String MAS,MENOS,POR,DIV;
 terminal String ENTERO, DECIMAL, CADENA, ID;
-terminal String PR_CONJ;
+terminal String PR_CONJ, FLECHA, COLOCHO, PUNTO, OR;
 
-non terminal ini, cuerpo;
+non terminal ini, cuerpo, conjunto, definicion, expresion, cuerpoExpresion;
 
 start with ini;
 
 ini ::= LLAVIZQ cuerpo LLAVDER;
 
-cuerpo ::= ID
-                | ENTERO
+cuerpo ::= conjunto
+                |cuerpo conjunto
+                | expresion
+                | cuerpo expresion
+;
+
+conjunto ::= PR_CONJ DOSPUNTOS ID FLECHA definicion PTCOMA
+;
+
+definicion ::= ID COLOCHO ID
+;
+
+expresion ::= ID FLECHA cuerpoExpresion PTCOMA
+;
+
+cuerpoExpresion ::= PUNTO
+                                | cuerpoExpresion PUNTO
+                                | LLAVIZQ ID LLAVDER
+                                | cuerpoExpresion LLAVIZQ ID LLAVDER
+                                | OR
+                                | cuerpoExpresion OR
+                                | CADENA
+                                | cuerpoExpresion CADENA
+                                | POR
+                                | cuerpoExpresion POR
+                                | MAS
+                                | cuerpoExpresion MAS
 ;
