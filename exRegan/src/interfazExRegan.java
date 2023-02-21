@@ -5,8 +5,14 @@
 * NERY JIMÉNEZ - 201700381
 */
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class interfazExRegan extends javax.swing.JFrame {
     //Variables para el proyecto
@@ -101,12 +107,22 @@ public class interfazExRegan extends javax.swing.JFrame {
         menuArchivo.setText("Archivo");
 
         itemAbrir.setText("Abrir");
+        itemAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAbrirActionPerformed(evt);
+            }
+        });
         menuArchivo.add(itemAbrir);
 
         itemGuardar.setText("Guardar");
         menuArchivo.add(itemGuardar);
 
         itemGuardarComo.setText("Guardar Como");
+        itemGuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemGuardarComoActionPerformed(evt);
+            }
+        });
         menuArchivo.add(itemGuardarComo);
 
         jMenuBar1.add(menuArchivo);
@@ -191,6 +207,46 @@ public class interfazExRegan extends javax.swing.JFrame {
         analizar();
         
     }//GEN-LAST:event_btnGenerarAutomataActionPerformed
+    //Menu Abrir archivo
+    private void itemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAbrirActionPerformed
+        // TODO add your handling code here:
+        JFileChooser file = new JFileChooser();
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter(".OLC","olc");
+        file.setFileFilter(filtro);
+        
+        int seleccion = file.showOpenDialog(this);
+        
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = file.getSelectedFile();
+            
+            try(FileReader fileR = new FileReader(fichero)){
+                String cadena = "";
+                int valor = fileR.read();
+                while(valor != -1){
+                    cadena = cadena +(char) valor;
+                    valor = fileR.read();
+                }
+                this.txtArchivo.setText(cadena);
+            }catch(IOException el){
+            }
+        }
+    }//GEN-LAST:event_itemAbrirActionPerformed
+    //Menu Guardar Como
+    private void itemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGuardarComoActionPerformed
+        // TODO add your handling code here:
+        JFileChooser file = new JFileChooser();
+        int seleccion = file.showSaveDialog(this);
+        
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = file.getSelectedFile();
+            
+            try(FileWriter fileW = new FileWriter(fichero)){
+                fileW.write(this.txtArchivo.getText());
+            } catch(IOException el){
+            }
+        }
+    }//GEN-LAST:event_itemGuardarComoActionPerformed
 
     /**
      * @param args the command line arguments

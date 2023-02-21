@@ -10,30 +10,57 @@ import java_cup.runtime.*;
 
 parser code
 {:
-    //codigo en java
+    //Método para manejar algún error sintáctico
+    public void syntax_error(Symbol s){ 
+        System.out.println("Error Sintáctico en la Línea " + (s.left) +
+        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+         
+    }
+
+    //Método errores sintácticos en el que ya no es posible recuperar errores
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
+        " no reconocido."); 
+    }
 :}
 
-terminal String DOSPUNTOS, PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER,LLAVDER,LLAVIZQ;
-terminal String MAS,MENOS,POR,DIV;
-terminal String ENTERO, DECIMAL, CADENA, ID;
-terminal String PR_CONJ, FLECHA, COLOCHO, PUNTO, OR;
+terminal String DOSPUNTOS, PTCOMA,PARABRE,PARCIERRA,CORABRE,CORCIERRA,LLAVABRE,LLAVCIERRA;
+terminal String MAS,MENOS,POR,DIV, PORCENTAJE;
+terminal String ENTERO, DECIMAL, CADENA, ID, ASCII;
+terminal String PR_CONJ, FLECHA, COLOCHO, PUNTO, OR, COMA, INTERROG, LN, COMSIMPLE;
+terminal String COMDOBLE;
 
-non terminal ini, cuerpo, conjunto, definicion, expresion, cuerpoExpresion;
+non terminal ini, cuerpo, conjunto, definicion, expresion, cuerpoExpresion, especiales, definido;
+non terminal lexemas;
 
 start with ini;
 
-ini ::= LLAVIZQ cuerpo LLAVDER;
+ini ::= LLAVABRE cuerpo LLAVCIERRA;
 
 cuerpo ::= conjunto
                 |cuerpo conjunto
                 | expresion
                 | cuerpo expresion
+                | lexemas
+                | cuerpo lexemas
 ;
 
 conjunto ::= PR_CONJ DOSPUNTOS ID FLECHA definicion PTCOMA
 ;
 
 definicion ::= ID COLOCHO ID
+                    | ASCII COLOCHO ASCII
+                    | definido
+;
+
+definido ::= ID
+                | definido ID
+                | definido COMA ID
+                | ASCII
+                | definido ASCII
+                | definido COMA ASCII
 ;
 
 expresion ::= ID FLECHA cuerpoExpresion PTCOMA
@@ -41,8 +68,8 @@ expresion ::= ID FLECHA cuerpoExpresion PTCOMA
 
 cuerpoExpresion ::= PUNTO
                                 | cuerpoExpresion PUNTO
-                                | LLAVIZQ ID LLAVDER
-                                | cuerpoExpresion LLAVIZQ ID LLAVDER
+                                | LLAVABRE ID LLAVCIERRA
+                                | cuerpoExpresion LLAVABRE ID LLAVCIERRA
                                 | OR
                                 | cuerpoExpresion OR
                                 | CADENA
@@ -51,4 +78,20 @@ cuerpoExpresion ::= PUNTO
                                 | cuerpoExpresion POR
                                 | MAS
                                 | cuerpoExpresion MAS
+                                | INTERROG
+                                | cuerpoExpresion INTERROG
+                                | ASCII
+                                | cuerpoExpresion ASCII
+                                | especiales
+                                | cuerpoExpresion especiales
+;
+
+especiales ::= LN
+                    | COMSIMPLE
+                    | COMDOBLE
+;
+
+lexemas ::= PORCENTAJE PORCENTAJE
+                | ID DOSPUNTOS CADENA PTCOMA
+                | ID DOSPUNTOS especiales PTCOMA
 ;

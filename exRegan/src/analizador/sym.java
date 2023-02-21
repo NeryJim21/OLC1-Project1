@@ -8,53 +8,67 @@ package analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int LLAVDER = 8;
   public static final int MENOS = 11;
-  public static final int PUNTO = 21;
+  public static final int PUNTO = 23;
+  public static final int CADENA = 17;
+  public static final int CORCIERRA = 7;
   public static final int DOSPUNTOS = 2;
-  public static final int CADENA = 16;
-  public static final int OR = 22;
-  public static final int DECIMAL = 15;
-  public static final int PARIZQ = 4;
-  public static final int COLOCHO = 20;
-  public static final int FLECHA = 19;
-  public static final int PARDER = 5;
-  public static final int ID = 17;
+  public static final int INTERROG = 26;
+  public static final int OR = 24;
+  public static final int DECIMAL = 16;
+  public static final int LN = 27;
+  public static final int COMDOBLE = 29;
+  public static final int COLOCHO = 22;
+  public static final int FLECHA = 21;
+  public static final int ID = 18;
   public static final int POR = 12;
-  public static final int PR_CONJ = 18;
+  public static final int COMSIMPLE = 28;
+  public static final int PORCENTAJE = 14;
+  public static final int COMA = 25;
+  public static final int PR_CONJ = 20;
+  public static final int LLAVABRE = 8;
   public static final int EOF = 0;
   public static final int DIV = 13;
   public static final int error = 1;
-  public static final int CORIZQ = 6;
-  public static final int ENTERO = 14;
-  public static final int CORDER = 7;
+  public static final int LLAVCIERRA = 9;
+  public static final int ASCII = 19;
+  public static final int ENTERO = 15;
+  public static final int PARABRE = 4;
+  public static final int PARCIERRA = 5;
   public static final int MAS = 10;
-  public static final int LLAVIZQ = 9;
+  public static final int CORABRE = 6;
   public static final int PTCOMA = 3;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "DOSPUNTOS",
   "PTCOMA",
-  "PARIZQ",
-  "PARDER",
-  "CORIZQ",
-  "CORDER",
-  "LLAVDER",
-  "LLAVIZQ",
+  "PARABRE",
+  "PARCIERRA",
+  "CORABRE",
+  "CORCIERRA",
+  "LLAVABRE",
+  "LLAVCIERRA",
   "MAS",
   "MENOS",
   "POR",
   "DIV",
+  "PORCENTAJE",
   "ENTERO",
   "DECIMAL",
   "CADENA",
   "ID",
+  "ASCII",
   "PR_CONJ",
   "FLECHA",
   "COLOCHO",
   "PUNTO",
-  "OR"
+  "OR",
+  "COMA",
+  "INTERROG",
+  "LN",
+  "COMSIMPLE",
+  "COMDOBLE"
   };
 }
 
