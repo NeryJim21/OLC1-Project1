@@ -19,7 +19,6 @@ import java_cup.runtime.Symbol;
 %cup
 %char
 %column
-%full
 %line
 %unicode
 
@@ -28,15 +27,15 @@ import java_cup.runtime.Symbol;
     yychar = 1;
 %init}
 
-BLANCOS = [ \r\t]+
+BLANCOS = [ \t\r\f\n]
 ENTERO = [0-9]+
 DECIMAL  = {ENTERO} ("."? [0-9]* )?
-CADENA =[\"] [^\"\n]* [\"\n]
+COMILLA = [\"]
 LETRA = [a-zA-ZñÑ]+
 ID = ({LETRA}|("_"{LETRA}))({LETRA}|{ENTERO}|"_")*
 UNILINEA = ("//".*\r\n)|("//".*\n)|("//".*\r)
 MULTILINEA = "<!""<"*([^*<]|[^*]"!"|"*"[^!])*"*"*"!>"
-ASCII = [ -&(-/:-@\[-`{-~]
+ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
 
 %%
 
@@ -45,18 +44,12 @@ ASCII = [ -&(-/:-@\[-`{-~]
 {UNILINEA} {}
 
 ":" { System.out.println("Reconocio "+yytext()+" dos puntos"); return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext());} 
-";" { System.out.println("Reconocio "+yytext()+" punto y coma"); return new Symbol(sym.PTCOMA, yyline, yychar, yytext());} 
-"(" { System.out.println("Reconocio "+yytext()+" parentesis abre"); return new Symbol(sym.PARABRE, yyline, yychar, yytext());} 
-")" { System.out.println("Reconocio "+yytext()+" parentesis cierra"); return new Symbol(sym.PARCIERRA, yyline, yychar, yytext());} 
-"[" { System.out.println("Reconocio "+yytext()+" corchete abre"); return new Symbol(sym.CORABRE, yyline, yychar, yytext());} 
-"]" { System.out.println("Reconocio "+yytext()+" corchete cierra"); return new Symbol(sym.CORCIERRA, yyline, yychar, yytext());} 
+";" { System.out.println("Reconocio "+yytext()+" punto y coma"); return new Symbol(sym.PTCOMA, yyline, yychar, yytext());}
 "{" { System.out.println("Reconocio "+yytext()+" llave abre"); return new Symbol(sym.LLAVABRE, yyline, yychar, yytext());} 
 "}" { System.out.println("Reconocio "+yytext()+" llave cierra"); return new Symbol(sym.LLAVCIERRA, yyline, yychar, yytext());} 
 
 "+" {return new Symbol(sym.MAS, yyline, yychar, yytext());} 
-"-" {return new Symbol(sym.MENOS, yyline, yychar, yytext());} 
 "*" {return new Symbol(sym.POR, yyline, yychar, yytext());} 
-"/" {return new Symbol(sym.DIV, yyline, yychar, yytext());} 
 "->" {return new Symbol(sym.FLECHA, yyline, yychar, yytext());}
 "~" {return new Symbol(sym.COLOCHO, yyline, yychar, yytext());}
 "." {return new Symbol(sym.PUNTO, yyline, yychar, yytext());} 
@@ -71,7 +64,7 @@ ASCII = [ -&(-/:-@\[-`{-~]
 \n {yychar=1;}
 
 "CONJ" {return new Symbol(sym.PR_CONJ, yyline, yychar, yytext());}
-{CADENA} {return new Symbol(sym.CADENA, yyline, yychar, yytext());}
+{COMILLA} {return new Symbol(sym.COMILLA, yyline, yychar, yytext());}
 {ID} {return new Symbol(sym.ID, yyline, yychar, yytext());}
 {ENTERO} {return new Symbol(sym.ID, yyline, yychar, yytext());}
 {DECIMAL} {return new Symbol(sym.ID, yyline, yychar, yytext());}

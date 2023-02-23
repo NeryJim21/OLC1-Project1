@@ -8,55 +8,42 @@ package analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int MENOS = 11;
-  public static final int PUNTO = 23;
-  public static final int CADENA = 17;
-  public static final int CORCIERRA = 7;
+  public static final int PUNTO = 16;
   public static final int DOSPUNTOS = 2;
-  public static final int INTERROG = 26;
-  public static final int OR = 24;
-  public static final int DECIMAL = 16;
-  public static final int LN = 27;
-  public static final int COMDOBLE = 29;
-  public static final int COLOCHO = 22;
-  public static final int FLECHA = 21;
-  public static final int ID = 18;
-  public static final int POR = 12;
-  public static final int COMSIMPLE = 28;
-  public static final int PORCENTAJE = 14;
-  public static final int COMA = 25;
-  public static final int PR_CONJ = 20;
-  public static final int LLAVABRE = 8;
+  public static final int INTERROG = 19;
+  public static final int OR = 17;
+  public static final int DECIMAL = 10;
+  public static final int LN = 20;
+  public static final int COMDOBLE = 22;
+  public static final int FLECHA = 14;
+  public static final int COLOCHO = 15;
+  public static final int ID = 11;
+  public static final int POR = 7;
+  public static final int COMSIMPLE = 21;
+  public static final int PORCENTAJE = 8;
+  public static final int COMA = 18;
+  public static final int PR_CONJ = 13;
+  public static final int LLAVABRE = 4;
   public static final int EOF = 0;
-  public static final int DIV = 13;
+  public static final int COMILLA = 23;
   public static final int error = 1;
-  public static final int LLAVCIERRA = 9;
-  public static final int ASCII = 19;
-  public static final int ENTERO = 15;
-  public static final int PARABRE = 4;
-  public static final int PARCIERRA = 5;
-  public static final int MAS = 10;
-  public static final int CORABRE = 6;
+  public static final int LLAVCIERRA = 5;
+  public static final int ASCII = 12;
+  public static final int ENTERO = 9;
+  public static final int MAS = 6;
   public static final int PTCOMA = 3;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "DOSPUNTOS",
   "PTCOMA",
-  "PARABRE",
-  "PARCIERRA",
-  "CORABRE",
-  "CORCIERRA",
   "LLAVABRE",
   "LLAVCIERRA",
   "MAS",
-  "MENOS",
   "POR",
-  "DIV",
   "PORCENTAJE",
   "ENTERO",
   "DECIMAL",
-  "CADENA",
   "ID",
   "ASCII",
   "PR_CONJ",
@@ -68,7 +55,8 @@ public class sym {
   "INTERROG",
   "LN",
   "COMSIMPLE",
-  "COMDOBLE"
+  "COMDOBLE",
+  "COMILLA"
   };
 }
 

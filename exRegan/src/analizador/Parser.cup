@@ -26,14 +26,14 @@ parser code
     }
 :}
 
-terminal String DOSPUNTOS, PTCOMA,PARABRE,PARCIERRA,CORABRE,CORCIERRA,LLAVABRE,LLAVCIERRA;
-terminal String MAS,MENOS,POR,DIV, PORCENTAJE;
-terminal String ENTERO, DECIMAL, CADENA, ID, ASCII;
+terminal String DOSPUNTOS, PTCOMA,LLAVABRE,LLAVCIERRA;
+terminal String MAS,POR, PORCENTAJE;
+terminal String ENTERO, DECIMAL, ID, ASCII;
 terminal String PR_CONJ, FLECHA, COLOCHO, PUNTO, OR, COMA, INTERROG, LN, COMSIMPLE;
-terminal String COMDOBLE;
+terminal String COMDOBLE, COMILLA;
 
 non terminal ini, cuerpo, conjunto, definicion, expresion, cuerpoExpresion, especiales, definido;
-non terminal lexemas;
+non terminal lexemas, operaciones, usoConjuntos, data, simbolos, asciiSymb, asciiComplement;
 
 start with ini;
 
@@ -51,39 +51,50 @@ conjunto ::= PR_CONJ DOSPUNTOS ID FLECHA definicion PTCOMA
 ;
 
 definicion ::= ID COLOCHO ID
-                    | ASCII COLOCHO ASCII
+                    | asciiSymb COLOCHO asciiSymb
                     | definido
 ;
 
 definido ::= ID
                 | definido ID
                 | definido COMA ID
-                | ASCII
-                | definido ASCII
-                | definido COMA ASCII
+                | asciiSymb
+                | definido asciiComplement
+                | definido COMA asciiComplement
+                | especiales
+                | definido COMA especiales
+;
+
+asciiComplement ::= PORCENTAJE
+                    | POR
+                    | MAS
+                    | PUNTO
+                    | DOSPUNTOS
+                    | LLAVABRE
+                    | LLAVCIERRA
+                    | OR
+                    | INTERROG
 ;
 
 expresion ::= ID FLECHA cuerpoExpresion PTCOMA
 ;
 
-cuerpoExpresion ::= PUNTO
-                                | cuerpoExpresion PUNTO
-                                | LLAVABRE ID LLAVCIERRA
-                                | cuerpoExpresion LLAVABRE ID LLAVCIERRA
-                                | OR
-                                | cuerpoExpresion OR
-                                | CADENA
-                                | cuerpoExpresion CADENA
-                                | POR
-                                | cuerpoExpresion POR
-                                | MAS
-                                | cuerpoExpresion MAS
-                                | INTERROG
-                                | cuerpoExpresion INTERROG
-                                | ASCII
-                                | cuerpoExpresion ASCII
-                                | especiales
-                                | cuerpoExpresion especiales
+cuerpoExpresion ::=  operaciones
+                                | cuerpoExpresion operaciones
+                                | usoConjuntos
+                                | cuerpoExpresion usoConjuntos
+                                | COMILLA data COMILLA
+                                | cuerpoExpresion COMILLA data COMILLA
+;
+
+operaciones ::= PUNTO
+                        | OR
+                        | POR
+                        | MAS
+                        | INTERROG
+;
+
+usoConjuntos ::= LLAVABRE ID LLAVCIERRA
 ;
 
 especiales ::= LN
@@ -91,7 +102,32 @@ especiales ::= LN
                     | COMDOBLE
 ;
 
+data ::=  ID
+            | data ID
+            | DECIMAL
+            | data DECIMAL
+            | especiales
+            | data especiales
+            | asciiSymb
+            | data asciiSymb
+;
+
+simbolos ::=  PORCENTAJE
+                    | POR
+                    | MAS
+                    | COMA
+                    | PUNTO
+                    | DOSPUNTOS
+                    | PTCOMA
+                    | LLAVABRE
+                    | LLAVCIERRA
+                    | OR
+                    | INTERROG
+;
+
+asciiSymb ::= ASCII
+                    | simbolos
+;
 lexemas ::= PORCENTAJE PORCENTAJE
-                | ID DOSPUNTOS CADENA PTCOMA
-                | ID DOSPUNTOS especiales PTCOMA
+                | ID DOSPUNTOS COMILLA data COMILLA PTCOMA
 ;
