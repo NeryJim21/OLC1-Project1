@@ -6,29 +6,36 @@
 */
 
 package analizador;
+
 import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+import Errors.Errors;
 
 parser code
 {:
+
+    //Lista para errores
+    public ArrayList<Errors> Errores = new ArrayList();
+
     //Método para manejar algún error sintáctico
     public void syntax_error(Symbol s){ 
-        System.out.println("Error Sintáctico en la Línea " + (s.left) +
-        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
-         
-    }
+        Errores.add(new Errors("Sintáctico", "Error de sintaxis detectado. Símbolo: " + s.value, s.left + "", s.right + ""));
+    } 
 
     //Método errores sintácticos en el que ya no es posible recuperar errores
-
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        System.out.println("Error síntactico irrecuperable en la Línea " + 
-        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
-        " no reconocido."); 
+        System.out.println("Error síntactico irrecuperable en la Línea " + (s.left)+ " Columna "+s.right+". Componente " + s.value + " no reconocido."); 
+    }
+
+    public ArrayList<Errors> getErrores(){
+        return Errores;
     }
 :}
 
 terminal String DOSPUNTOS, PTCOMA,LLAVABRE,LLAVCIERRA;
 terminal String MAS,POR, PORCENTAJE;
-terminal String ENTERO, DECIMAL, ID, ASCII;
+terminal String DECIMAL, ID, ASCII;
 terminal String PR_CONJ, FLECHA, COLOCHO, PUNTO, OR, COMA, INTERROG, LN, COMSIMPLE;
 terminal String COMDOBLE, COMILLA;
 
@@ -45,9 +52,11 @@ cuerpo ::= conjunto
                 | cuerpo expresion
                 | lexemas
                 | cuerpo lexemas
+                | cuerpo error
 ;
 
 conjunto ::= PR_CONJ DOSPUNTOS ID FLECHA definicion PTCOMA
+                  | error PTCOMA
 ;
 
 definicion ::= ID COLOCHO ID
@@ -56,24 +65,24 @@ definicion ::= ID COLOCHO ID
 ;
 
 definido ::= ID
-                | definido ID
-                | definido COMA ID
-                | asciiSymb
-                | definido asciiComplement
-                | definido COMA asciiComplement
-                | especiales
-                | definido COMA especiales
+                 | definido ID
+                 | definido COMA ID
+                 | asciiSymb
+                 | definido asciiComplement
+                 | definido COMA asciiComplement
+                 | especiales
+                 | definido COMA especiales
 ;
 
 asciiComplement ::= PORCENTAJE
-                    | POR
-                    | MAS
-                    | PUNTO
-                    | DOSPUNTOS
-                    | LLAVABRE
-                    | LLAVCIERRA
-                    | OR
-                    | INTERROG
+                                | POR
+                                | MAS
+                                | PUNTO
+                                | DOSPUNTOS
+                                | LLAVABRE
+                                | LLAVCIERRA
+                                | OR
+                                | INTERROG
 ;
 
 expresion ::= ID FLECHA cuerpoExpresion PTCOMA
@@ -129,5 +138,5 @@ asciiSymb ::= ASCII
                     | simbolos
 ;
 lexemas ::= PORCENTAJE PORCENTAJE
-                | ID DOSPUNTOS COMILLA data COMILLA PTCOMA
+                 | ID DOSPUNTOS COMILLA data COMILLA PTCOMA
 ;

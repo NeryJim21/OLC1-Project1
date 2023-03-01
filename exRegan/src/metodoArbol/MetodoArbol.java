@@ -1,0 +1,12 @@
+/*
+* ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1 SECCIÓN C
+* PROYECTO 1 - EXREGAN
+* PRIMER SEMESTRE 2023
+* NERY JIMÉNEZ - 201700381
+*/
+
+package metodoArbol;
+
+public class MetodoArbol {
+    
+}

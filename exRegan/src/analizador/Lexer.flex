@@ -7,11 +7,13 @@
 
 package analizador;
 import java_cup.runtime.Symbol;
-
+import Errors.Errors;
+import java.util.ArrayList;
 %%
 
 %{
     //Codigo en sintaxis java
+    public ArrayList<Errors> Errores = new ArrayList();
 %}
 
 %class Lexer
@@ -39,6 +41,7 @@ ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
 
 %%
 
+"\n" {yychar=0;}
 {BLANCOS} {}
 {MULTILINEA}  {}
 {UNILINEA} {}
@@ -61,7 +64,6 @@ ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
 "\\n" {System.out.println("Reconocio "+yytext()+" salto de linea"); return new Symbol(sym.LN, yyline, yychar, yytext());}
 "\\'" {System.out.println("Reconocio "+yytext()+" comilla simple"); return new Symbol(sym.COMSIMPLE, yyline, yychar, yytext());}
 "\\\"" {System.out.println("Reconocio "+yytext()+" comilla doble"); return new Symbol(sym.COMDOBLE, yyline, yychar, yytext());}
-\n {yychar=1;}
 
 "CONJ" {return new Symbol(sym.PR_CONJ, yyline, yychar, yytext());}
 {COMILLA} {return new Symbol(sym.COMILLA, yyline, yychar, yytext());}
@@ -73,4 +75,5 @@ ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
 . {
     //Aqui se debe guardar los valores (yytext(), yyline, yychar ) para posteriormente generar el reporte de errores Léxicos.
     System.out.println("Este es un error lexico: "+yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
+    Errores.add(new Errors("Lexico", "Caracter no valido detectado: " + yytext(), yyline + "", yychar + ""));
 }

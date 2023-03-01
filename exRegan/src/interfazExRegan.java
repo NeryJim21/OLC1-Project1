@@ -13,6 +13,10 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import Errors.Errors;
+import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 
 public class interfazExRegan extends javax.swing.JFrame {
     //Variables para el proyecto
@@ -286,13 +290,73 @@ public class interfazExRegan extends javax.swing.JFrame {
     //Metodo para analizar
     public void analizar(){
         listaItems = "";
+        ArrayList<Errors> errores = new ArrayList();
         
         try{
             String path = txtArchivo.getText();
+            analizador.Lexer Lexico;
             analizador.Parser Sintactico;
-            Sintactico = new analizador.Parser(new analizador.Lexer(new StringReader(path)));
+            Lexico = new analizador.Lexer(new BufferedReader(new StringReader(path)));
+            Sintactico = new analizador.Parser(Lexico);
             Sintactico.parse();
             txtConsola.setText("Item analizado: "+listaItems);
+            errores.addAll(Lexico.Errores);
+            errores.addAll(Sintactico.getErrores());
+            
+            generarHtml(errores);
+        }catch(Exception e){
+        }
+    }
+    
+    //Generar reporte de errores
+    public static void generarHtml(ArrayList<Errors> errores) throws IOException {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try{
+            String path = "/home/n21/Documentos/USAC/OLC1/LAB/PROYECTOS/PROYECTO1/repo/OLC1-Project1/ERRORES_201700381/Errores.html";
+            fichero = new FileWriter(path);
+            pw = new PrintWriter(fichero);
+            
+            //Escribiendo HTML
+            pw.println("<!DOCTYPE html>");
+            pw.println("<html>");
+            pw.println("<head><title>REPORTE DE ERRORES</title>");
+            pw.println("<link rel=StyleSheet href=\"stylesheet.css\" type=\"text/css\" ></head>");
+            pw.println("<body>");
+            pw.println("<h1><span class=\"blue\"></span>EX<span class=\"blue\"></span><span class=\"yellow\">REGAN</pan></h1>");
+            pw.println("<h2>Reporte de Errores</h2>");
+            pw.println(" <table class=\"container\">");
+            pw.println("<thead>");
+            pw.println("<tr>");
+            pw.println("<th><h1>ERROR</h1></th>");
+            pw.println("<th><h1>DESCRIPCION</h1></th>");
+            pw.println("<th><h1>FILA</h1></th>");
+            pw.println("<th><h1>COLUMNA</h1></th>");
+            pw.println("</tr>");
+            pw.println("</thead>");
+            pw.println("<tbody>");
+            
+            for (Errors err : errores) {
+                pw.println("<tr>");
+                 pw.println("<td>" + err.type + "</td>");
+                pw.println("<td>" + err.description + "</td>");
+                pw.println("<td>" + err.line + "</td>");
+                pw.println("<td>" + err.column + "</td>");
+                pw.println("</tr>");
+            }
+            pw.println("</tbody>");
+            pw.println("</table>");
+            pw.println("</body>");
+            pw.println("</html>");
+            Desktop.getDesktop().open(new File(path));
+        } catch(Exception e){
+        } finally{
+            if(null != fichero){
+                fichero.close();
+            }
+        }
+        try{
+            
         }catch(Exception e){
         }
     }
