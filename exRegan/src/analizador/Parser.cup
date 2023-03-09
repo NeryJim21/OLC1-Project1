@@ -11,10 +11,12 @@ import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
 import Errors.Errors;
+import metodoArbol.*;
 
 parser code
 {:
-
+    ArrayList<MetodoArbol> arboles = new ArrayList<>();
+    
     //Lista para errores
     public ArrayList<Errors> Errores = new ArrayList();
 
@@ -31,6 +33,7 @@ parser code
     public ArrayList<Errors> getErrores(){
         return Errores;
     }
+
 :}
 
 terminal String DOSPUNTOS, PTCOMA,LLAVABRE,LLAVCIERRA;
@@ -40,103 +43,197 @@ terminal String PR_CONJ, FLECHA, COLOCHO, PUNTO, OR, COMA, INTERROG, LN, COMSIMP
 terminal String COMDOBLE, COMILLA;
 
 non terminal ini, cuerpo, conjunto, definicion, expresion, cuerpoExpresion, especiales, definido;
-non terminal lexemas, operaciones, usoConjuntos, data, simbolos, asciiSymb, asciiComplement;
+non terminal lexemas, usoConjuntos, data, simbolos, asciiSymb, asciiComplement;
 
 start with ini;
 
-ini ::= LLAVABRE cuerpo LLAVCIERRA;
+ini ::= LLAVABRE:a cuerpo:b LLAVCIERRA:c;
 
-cuerpo ::= conjunto
-                |cuerpo conjunto
-                | expresion
-                | cuerpo expresion
-                | lexemas
-                | cuerpo lexemas
+cuerpo ::= conjunto:a
+                |cuerpo:a conjunto:b
+                | expresion:a
+                | cuerpo:a expresion:b
+                | lexemas:a
+                | cuerpo:a lexemas:b
                 | cuerpo error
 ;
 
-conjunto ::= PR_CONJ DOSPUNTOS ID FLECHA definicion PTCOMA
+conjunto ::= PR_CONJ:a DOSPUNTOS:b ID:c FLECHA:d definicion:e PTCOMA:f
                   | error PTCOMA
 ;
 
-definicion ::= ID COLOCHO ID
-                    | asciiSymb COLOCHO asciiSymb
-                    | definido
+definicion ::= ID:a COLOCHO:b ID:c
+                    | asciiSymb:a COLOCHO:b asciiSymb:c
+                    | definido:a
 ;
 
-definido ::= ID
-                 | definido ID
-                 | definido COMA ID
-                 | asciiSymb
-                 | definido asciiComplement
-                 | definido COMA asciiComplement
-                 | especiales
-                 | definido COMA especiales
+definido ::= ID:a
+                 | definido:a ID:b
+                 | definido:a COMA:b ID:c
+                 | asciiSymb:a
+                 | definido:a asciiComplement:b
+                 | definido:a COMA:b asciiComplement:c
+                 | especiales:a
+                 | definido:a COMA:b especiales:c
 ;
 
-asciiComplement ::= PORCENTAJE
-                                | POR
-                                | MAS
-                                | PUNTO
-                                | DOSPUNTOS
-                                | LLAVABRE
-                                | LLAVCIERRA
-                                | OR
-                                | INTERROG
+asciiComplement ::= PORCENTAJE:a {:
+                                    RESULT = a;
+                                :}
+                                | POR:a {:
+                                    RESULT = a;
+                                :}
+                                | MAS:a {:
+                                    RESULT = a;
+                                :}
+                                | PUNTO:a {:
+                                    RESULT = a;
+                                :}
+                                | DOSPUNTOS:a {:
+                                    RESULT = a;
+                                :}
+                                | LLAVABRE:a {:
+                                    RESULT = a;
+                                :}
+                                | LLAVCIERRA:a {:
+                                    RESULT = a;
+                                :}
+                                | OR:a {:
+                                    RESULT = a;
+                                :}
+                                | INTERROG:a {:
+                                    RESULT = a;
+                                :}
 ;
 
-expresion ::= ID FLECHA cuerpoExpresion PTCOMA
+expresion ::= ID:a FLECHA:b cuerpoExpresion:c PTCOMA:d {:
+                        arboles.add(new MetodoArbol((Nodo)c));
+                    :}
 ;
 
-cuerpoExpresion ::=  operaciones
-                                | cuerpoExpresion operaciones
-                                | usoConjuntos
-                                | cuerpoExpresion usoConjuntos
-                                | COMILLA data COMILLA
-                                | cuerpoExpresion COMILLA data COMILLA
+cuerpoExpresion ::=  PUNTO:a cuerpoExpresion:b cuerpoExpresion:c {:
+                                    Nodo padre = new Nodo(a);
+                                    padre.setHijoIzq((Nodo)b);
+                                    padre.setHijoDer((Nodo)c);
+                                    RESULT = padre;
+                                :}
+                                | OR:a cuerpoExpresion:b cuerpoExpresion:c {:
+                                    Nodo padre = new Nodo(a);
+                                    padre.setHijoIzq((Nodo)b);
+                                    padre.setHijoDer((Nodo)c);
+                                    RESULT = padre;
+                                :}
+                                | POR:a cuerpoExpresion:b {:
+                                    Nodo padre = new Nodo(a);
+                                    padre.setHijoIzq((Nodo)b);
+                                    RESULT = padre;
+                                :}
+                                | MAS:a cuerpoExpresion:b {:
+                                    Nodo padre = new Nodo(a);
+                                    padre.setHijoIzq((Nodo)b);
+                                    RESULT = padre;
+                                :}
+                                | INTERROG:a cuerpoExpresion:b  {:
+                                    Nodo padre = new Nodo(a);
+                                    padre.setHijoIzq((Nodo)b);
+                                    RESULT = padre;
+                                :}
+                                | usoConjuntos:a {:
+                                    Nodo hoja = new Nodo((String)a);
+                                    hoja.setHoja(true);
+                                    hoja.setAnulable(false);
+                                    RESULT = hoja;
+                                :}
+                                | COMILLA:a data:b COMILLA:c{:
+                                    Nodo hoja = new Nodo((String)b);
+                                    hoja.setHoja(true);
+                                    hoja.setAnulable(false);
+                                    RESULT = hoja;
+                                :}
 ;
 
-operaciones ::= PUNTO
-                        | OR
-                        | POR
-                        | MAS
-                        | INTERROG
+usoConjuntos ::= LLAVABRE:a ID:b LLAVCIERRA:c {:
+                                RESULT = b;
+                            :}
 ;
 
-usoConjuntos ::= LLAVABRE ID LLAVCIERRA
+especiales ::= LN:a {:
+                        RESULT = a;
+                    :}
+                    | COMSIMPLE:a {:
+                        RESULT = a;
+                    :}
+                    | COMDOBLE:a {:
+                        RESULT = a;
+                    :}
 ;
 
-especiales ::= LN
-                    | COMSIMPLE
-                    | COMDOBLE
+data ::=  ID:a {:
+                RESULT = a;
+            :}
+            | data:a ID:b {:
+                RESULT = b;
+            :}
+            | DECIMAL:a  {:
+                RESULT = a;
+            :}
+            | data:a DECIMAL:b {:
+                RESULT = b;
+            :}
+            | especiales:a  {:
+                RESULT = a;
+            :}
+            | data:a especiales:b {:
+                RESULT = b;
+            :}
+            | asciiSymb:a  {:
+                RESULT = a;
+            :}
+            | data:a asciiSymb:b {:
+                RESULT = b;
+            :}
 ;
 
-data ::=  ID
-            | data ID
-            | DECIMAL
-            | data DECIMAL
-            | especiales
-            | data especiales
-            | asciiSymb
-            | data asciiSymb
+simbolos ::=  PORCENTAJE:a {:
+                        RESULT = a;
+                    :}
+                    | POR:a {:
+                        RESULT = a;
+                    :}
+                    | MAS:a {:
+                        RESULT = a;
+                    :}
+                    | COMA:a {:
+                        RESULT = a;
+                    :}
+                    | PUNTO:a {:
+                        RESULT = a;
+                    :}
+                    | DOSPUNTOS:a {:
+                        RESULT = a;
+                    :}
+                    | PTCOMA:a {:
+                        RESULT = a;
+                    :}
+                    | LLAVABRE:a {:
+                        RESULT = a;
+                    :}
+                    | LLAVCIERRA:a {:
+                        RESULT = a;
+                    :}
+                    | OR:a {:
+                        RESULT = a;
+                    :}
+                    | INTERROG:a
 ;
 
-simbolos ::=  PORCENTAJE
-                    | POR
-                    | MAS
-                    | COMA
-                    | PUNTO
-                    | DOSPUNTOS
-                    | PTCOMA
-                    | LLAVABRE
-                    | LLAVCIERRA
-                    | OR
-                    | INTERROG
+asciiSymb ::= ASCII:a {:
+                        RESULT = a;
+                    :}
+                    | simbolos:a {:
+                        RESULT = a;
+                    :}
 ;
-
-asciiSymb ::= ASCII
-                    | simbolos
-;
-lexemas ::= PORCENTAJE PORCENTAJE
-                 | ID DOSPUNTOS COMILLA data COMILLA PTCOMA
+lexemas ::= PORCENTAJE:a PORCENTAJE:b
+                 | ID:a DOSPUNTOS:b COMILLA:c data:d COMILLA:e PTCOMA:f
 ;
