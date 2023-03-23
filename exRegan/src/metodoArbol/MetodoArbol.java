@@ -9,12 +9,15 @@ package metodoArbol;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class MetodoArbol {
     public Nodo arbolExpresiones;
     public int numNodo = 1;
     public int numDot = 1;
-
+    //public ArrayList tablaSiguientes;
+    ArrayList <ArrayList> tablaSiguientes = new ArrayList<>();
+    
     public MetodoArbol(Nodo arbolExpresiones) {
         Nodo raiz = new Nodo(".");
         Nodo acepta = new Nodo("#");
@@ -25,7 +28,9 @@ public class MetodoArbol {
         this.arbolExpresiones = raiz;
         asignarIndice(this.arbolExpresiones);
         numNodo = 0;
+//        ArrayList <ArrayList> tablaSiguientes = new ArrayList<>();
         anulables(this.arbolExpresiones);
+        System.out.println("Tabla siguientes:"+tablaSiguientes);
         //System.out.println(crearArbol(this.arbolExpresiones,numNodo));
         generarDot(crearArbol(this.arbolExpresiones,numNodo),Integer.toString(numDot));
         numDot++;
@@ -53,7 +58,7 @@ public class MetodoArbol {
         
         if(actual.isHoja()){
             actual.getPrimeros().add(actual.getNum());
-            actual.getUltimos().add(actual.getNum());
+            actual.getUltimos().add(actual.getNum()); 
             return;
         }
         
@@ -75,16 +80,72 @@ public class MetodoArbol {
                 }else{
                     actual.getUltimos().addAll(actual.getHijoIzq().getUltimos());
                 }
+                
+                if(!"#".equals(actual.getHijoDer().getToken())){
+                    //Creando tabla de siguientes
+                    ArrayList<Integer> follow = new ArrayList<>();
+                    follow = actual.getHijoIzq().getUltimos();
+                    ArrayList<Integer> listaFollow = new ArrayList<>();
+                    listaFollow = actual.getHijoDer().getPrimeros();
+                    String token = actual.getHijoIzq().getToken();
+                    for(int item : follow){
+                        ArrayList tabla = new ArrayList();
+                        tabla.add(token);
+                        tabla.add(item);
+                        tabla.add(listaFollow);
+                        tablaSiguientes.add(tabla);
+                    }
+                }else{
+                    //Creando tabla de siguientes
+                    ArrayList<Integer> follow = new ArrayList<>();
+                    follow = actual.getHijoIzq().getUltimos();
+                    ArrayList<Integer> listaFollow = new ArrayList<>();
+                    listaFollow = actual.getHijoDer().getPrimeros();
+                    for(int item : follow){
+                        ArrayList tabla = new ArrayList();
+                        tabla.add("#");
+                        tabla.add(item);
+                        tabla.add("--");
+                        tablaSiguientes.add(tabla);
+                    }
+                }
                 break;
             case "*":
                 actual.setAnulable(true);
                 actual.getPrimeros().addAll(actual.getHijoIzq().getPrimeros());
                 actual.getUltimos().addAll(actual.getHijoIzq().getUltimos());
+                //Creando tabla de siguientes
+                 ArrayList<Integer> follow = new ArrayList<>();
+                 follow = actual.getHijoIzq().getUltimos();
+                 ArrayList<Integer> listaFollow = new ArrayList<>();
+                 listaFollow = actual.getHijoIzq().getPrimeros();
+                 String token = actual.getHijoIzq().getToken();
+                 for(int item : follow){
+                     ArrayList tabla = new ArrayList();
+                     tabla.add(token);
+                     tabla.add(item);
+                     tabla.add(listaFollow);
+                     tablaSiguientes.add(tabla);
+                    }
                 break;
             case "+":
                 actual.setAnulable(actual.getHijoIzq().isAnulable());
                 actual.getPrimeros().addAll(actual.getHijoIzq().getPrimeros());
                 actual.getUltimos().addAll(actual.getHijoIzq().getUltimos());
+                //Creando tabla de siguientes
+                ArrayList<Integer> flw = new ArrayList<>();
+                flw = actual.getHijoIzq().getUltimos();
+                ArrayList<Integer> listFollow = new ArrayList<>();
+                listFollow = actual.getHijoIzq().getPrimeros();
+                String tokn = actual.getHijoIzq().getToken();
+                for(int item : flw){
+                    ArrayList tabla = new ArrayList();
+                    tabla.add(tokn);
+                    tabla.add(item);
+                    tabla.add(listFollow);
+                    tablaSiguientes.add(tabla);
+                }
+                  
                 break;
             case "|":
                 actual.setAnulable(actual.getHijoIzq().isAnulable() || actual.getHijoDer().isAnulable());
@@ -159,13 +220,17 @@ public class MetodoArbol {
         PrintWriter escritor = null;
         String path = "/home/n21/Documentos/USAC/OLC1/LAB/PROYECTOS/PROYECTO1/repo/OLC1-Project1/ARBOLES_201700381/";
         String name = "";
+        String nameJPG = "";
         try{
             
             name +="Tree"+i+".dot";
+            nameJPG ="Tree"+i+".jpg";
             path += name;
             fichero = new FileWriter(path);
             escritor = new PrintWriter(fichero);
-            escritor.println(dot);
+            String pivDot = "digraph G { \n";
+            pivDot += dot + "\n }";
+            escritor.println(pivDot);
             escritor.close();
             fichero.close();
         } catch(Exception e){
@@ -174,7 +239,9 @@ public class MetodoArbol {
         
         try{
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o "+name);
+            String imprimir = " dot -Tjpg  "+name + " -o "+nameJPG; 
+            rt.exec(imprimir);
+            System.out.println(imprimir);
             Thread.sleep(500);
             System.out.println("JPG Generado");
         }catch(Exception ex){

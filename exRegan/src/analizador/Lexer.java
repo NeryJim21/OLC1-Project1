@@ -699,22 +699,22 @@ public class Lexer implements java_cup.runtime.Scanner {
             // fall through
           case 32: break;
           case 10: 
-            { System.out.println("Reconocio "+yytext()+" dos puntos"); return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext());
+            { return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext());
             } 
             // fall through
           case 33: break;
           case 11: 
-            { System.out.println("Reconocio "+yytext()+" punto y coma"); return new Symbol(sym.PTCOMA, yyline, yychar, yytext());
+            { return new Symbol(sym.PTCOMA, yyline, yychar, yytext());
             } 
             // fall through
           case 34: break;
           case 12: 
-            { System.out.println("Reconocio "+yytext()+" llave abre"); return new Symbol(sym.LLAVABRE, yyline, yychar, yytext());
+            { return new Symbol(sym.LLAVABRE, yyline, yychar, yytext());
             } 
             // fall through
           case 35: break;
           case 13: 
-            { System.out.println("Reconocio "+yytext()+" llave cierra"); return new Symbol(sym.LLAVCIERRA, yyline, yychar, yytext());
+            { return new Symbol(sym.LLAVCIERRA, yyline, yychar, yytext());
             } 
             // fall through
           case 36: break;
@@ -749,17 +749,17 @@ public class Lexer implements java_cup.runtime.Scanner {
             // fall through
           case 42: break;
           case 20: 
-            { System.out.println("Reconocio "+yytext()+" comilla doble"); return new Symbol(sym.COMDOBLE, yyline, yychar, yytext());
+            { return new Symbol(sym.COMDOBLE, yyline, yychar, yytext());
             } 
             // fall through
           case 43: break;
           case 21: 
-            { System.out.println("Reconocio "+yytext()+" salto de linea"); return new Symbol(sym.LN, yyline, yychar, yytext());
+            { return new Symbol(sym.LN, yyline, yychar, yytext());
             } 
             // fall through
           case 44: break;
           case 22: 
-            { System.out.println("Reconocio "+yytext()+" comilla simple"); return new Symbol(sym.COMSIMPLE, yyline, yychar, yytext());
+            { return new Symbol(sym.COMSIMPLE, yyline, yychar, yytext());
             } 
             // fall through
           case 45: break;

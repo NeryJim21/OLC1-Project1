@@ -46,10 +46,10 @@ ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
 {MULTILINEA}  {}
 {UNILINEA} {}
 
-":" { System.out.println("Reconocio "+yytext()+" dos puntos"); return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext());} 
-";" { System.out.println("Reconocio "+yytext()+" punto y coma"); return new Symbol(sym.PTCOMA, yyline, yychar, yytext());}
-"{" { System.out.println("Reconocio "+yytext()+" llave abre"); return new Symbol(sym.LLAVABRE, yyline, yychar, yytext());} 
-"}" { System.out.println("Reconocio "+yytext()+" llave cierra"); return new Symbol(sym.LLAVCIERRA, yyline, yychar, yytext());} 
+":" { return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext());} 
+";" { return new Symbol(sym.PTCOMA, yyline, yychar, yytext());}
+"{" { return new Symbol(sym.LLAVABRE, yyline, yychar, yytext());} 
+"}" { return new Symbol(sym.LLAVCIERRA, yyline, yychar, yytext());} 
 
 "+" {return new Symbol(sym.MAS, yyline, yychar, yytext());} 
 "*" {return new Symbol(sym.POR, yyline, yychar, yytext());} 
@@ -61,9 +61,9 @@ ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
 "%" {return new Symbol(sym.PORCENTAJE, yyline, yychar, yytext());}
 "?" {return new Symbol(sym.INTERROG, yyline, yychar, yytext());}
 "," {return new Symbol(sym.COMA, yyline, yychar, yytext());}
-"\\n" {System.out.println("Reconocio "+yytext()+" salto de linea"); return new Symbol(sym.LN, yyline, yychar, yytext());}
-"\\'" {System.out.println("Reconocio "+yytext()+" comilla simple"); return new Symbol(sym.COMSIMPLE, yyline, yychar, yytext());}
-"\\\"" {System.out.println("Reconocio "+yytext()+" comilla doble"); return new Symbol(sym.COMDOBLE, yyline, yychar, yytext());}
+"\\n" {return new Symbol(sym.LN, yyline, yychar, yytext());}
+"\\'" {return new Symbol(sym.COMSIMPLE, yyline, yychar, yytext());}
+"\\\"" {return new Symbol(sym.COMDOBLE, yyline, yychar, yytext());}
 
 "CONJ" {return new Symbol(sym.PR_CONJ, yyline, yychar, yytext());}
 {COMILLA} {return new Symbol(sym.COMILLA, yyline, yychar, yytext());}
