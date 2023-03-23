@@ -95,7 +95,9 @@ public class MetodoArbol {
                             if(ts.get(1).equals(item)){
                                 ArrayList<Integer> pivL = (ArrayList<Integer>) ts.get(2);
                                 for(int pivItem : listaFollow){
-                                    pivL.add(pivItem);
+                                    if(!pivL.contains(pivItem)){
+                                        pivL.add(pivItem);
+                                    }
                                 }
                                 ts.set(2, pivL);
                                 alerta = true;
@@ -137,7 +139,9 @@ public class MetodoArbol {
                             if(ts.get(1).equals(item)){
                                 ArrayList<Integer> pivL = (ArrayList<Integer>) ts.get(2);
                                 for(int pivItem : listaFollow1){
-                                    pivL.add(pivItem);
+                                    if(!pivL.contains(pivItem)){
+                                        pivL.add(pivItem);
+                                    }
                                 }
                                 ts.set(2, pivL);
                                 alerta1 = true;
@@ -171,7 +175,9 @@ public class MetodoArbol {
                             if(ts.get(1).equals(item)){
                                 ArrayList<Integer> pivL = (ArrayList<Integer>) ts.get(2);
                                 for(int pivItem : listaFollow2){
-                                    pivL.add(pivItem);
+                                    if(!pivL.contains(pivItem)){
+                                        pivL.add(pivItem);
+                                    }
                                 }
                                 ts.set(2, pivL);
                                 alerta2 = true;
