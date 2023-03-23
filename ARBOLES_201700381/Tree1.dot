@@ -7,7 +7,7 @@ N1[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[1, 4, 6, 10, 13, 15, 19]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[1, 4, 6, 7, 9, 10, 13, 15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[19]</TD>
 </TR>
 </TABLE>>];N2[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
@@ -17,7 +17,7 @@ N1[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[1, 4, 6, 10, 13, 15]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[1, 4, 6, 7, 9, 10, 13, 15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[3, 5, 6, 8, 9, 12, 14, 15, 17, 18]</TD>
 </TR>
 </TABLE>>];N1 -> N2;
 N3[shape = none label=<
@@ -28,7 +28,7 @@ N3[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[1, 4, 6]</TD>
 <TD>|</TD>
-<TD bgcolor = "hotpink1">[1, 4, 6, 7, 9]</TD>
+<TD bgcolor = "hotpink1">[3, 5, 6, 8, 9]</TD>
 </TR>
 </TABLE>>];N2 -> N3;
 N4[shape = none label=<
@@ -39,7 +39,7 @@ N4[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[1]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[1]</TD>
+<TD bgcolor = "hotpink1">[3]</TD>
 </TR>
 </TABLE>>];N3 -> N4;
 N5[shape = none label=<
@@ -64,7 +64,7 @@ N6[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[2]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[2]</TD>
+<TD bgcolor = "hotpink1">[3]</TD>
 </TR>
 </TABLE>>];N4 -> N6;
 N7[shape = none label=<
@@ -103,7 +103,7 @@ N9[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[4, 6]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[4, 6, 7, 9]</TD>
+<TD bgcolor = "hotpink1">[5, 6, 8, 9]</TD>
 </TR>
 </TABLE>>];N3 -> N9;
 N10[shape = none label=<
@@ -114,7 +114,7 @@ N10[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[4, 6]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[4, 6, 7, 9]</TD>
+<TD bgcolor = "hotpink1">[5, 6, 8, 9]</TD>
 </TR>
 </TABLE>>];N9 -> N10;
 N11[shape = none label=<
@@ -123,9 +123,9 @@ N11[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[4, 6]</TD>
+<TD bgcolor="palegreen1">[4, 6, 4, 6, 10, 13, 15, 19]</TD>
 <TD>|</TD>
-<TD bgcolor = "hotpink1">[4, 6, 7, 9]</TD>
+<TD bgcolor = "hotpink1">[5, 6, 8, 9]</TD>
 </TR>
 </TABLE>>];N10 -> N11;
 N12[shape = none label=<
@@ -136,7 +136,7 @@ N12[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[4]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[4]</TD>
+<TD bgcolor = "hotpink1">[5]</TD>
 </TR>
 </TABLE>>];N11 -> N12;
 N13[shape = none label=<
@@ -175,7 +175,7 @@ N15[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[6]</TD>
 <TD>+</TD>
-<TD bgcolor = "hotpink1">[6, 7, 9]</TD>
+<TD bgcolor = "hotpink1">[6, 8, 9]</TD>
 </TR>
 </TABLE>>];N11 -> N15;
 N16[shape = none label=<
@@ -186,7 +186,7 @@ N16[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[6]</TD>
 <TD>+</TD>
-<TD bgcolor = "hotpink1">[6, 7, 9]</TD>
+<TD bgcolor = "hotpink1">[6, 8, 9]</TD>
 </TR>
 </TABLE>>];N15 -> N16;
 N17[shape = none label=<
@@ -197,7 +197,7 @@ N17[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[6]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[6, 7, 9]</TD>
+<TD bgcolor = "hotpink1">[6, 8, 9]</TD>
 </TR>
 </TABLE>>];N16 -> N17;
 N18[shape = none label=<
@@ -220,9 +220,9 @@ N19[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">true</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[7, 9]</TD>
+<TD bgcolor="palegreen1">[7, 9, 6, 6, 4, 6, 4, 6, 10, 13, 15, 19]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[7, 9]</TD>
+<TD bgcolor = "hotpink1">[8, 9]</TD>
 </TR>
 </TABLE>>];N17 -> N19;
 N20[shape = none label=<
@@ -233,7 +233,7 @@ N20[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[7, 9]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[7, 9]</TD>
+<TD bgcolor = "hotpink1">[8, 9]</TD>
 </TR>
 </TABLE>>];N19 -> N20;
 N21[shape = none label=<
@@ -242,9 +242,9 @@ N21[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[7, 9]</TD>
+<TD bgcolor="palegreen1">[7, 9, 7, 9, 7, 9, 6, 6, 6, 6, 4, 6, 4, 6, 4, 6, 4, 6, 10, 13, 15, 10, 13, 15, 19, 19]</TD>
 <TD>|</TD>
-<TD bgcolor = "hotpink1">[7, 9]</TD>
+<TD bgcolor = "hotpink1">[8, 9]</TD>
 </TR>
 </TABLE>>];N20 -> N21;
 N22[shape = none label=<
@@ -255,7 +255,7 @@ N22[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[7]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[7]</TD>
+<TD bgcolor = "hotpink1">[8]</TD>
 </TR>
 </TABLE>>];N21 -> N22;
 N23[shape = none label=<
@@ -306,9 +306,9 @@ N26[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">true</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[10, 13, 15]</TD>
+<TD bgcolor="palegreen1">[10, 13, 15, 19]</TD>
 <TD>|</TD>
-<TD bgcolor = "hotpink1">[10, 13, 15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[12, 14, 15, 17, 18]</TD>
 </TR>
 </TABLE>>];N2 -> N26;
 N27[shape = none label=<
@@ -319,7 +319,7 @@ N27[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[10]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[10]</TD>
+<TD bgcolor = "hotpink1">[12]</TD>
 </TR>
 </TABLE>>];N26 -> N27;
 N28[shape = none label=<
@@ -344,7 +344,7 @@ N29[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[11]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[11]</TD>
+<TD bgcolor = "hotpink1">[12]</TD>
 </TR>
 </TABLE>>];N27 -> N29;
 N30[shape = none label=<
@@ -383,7 +383,7 @@ N32[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[13, 15]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[13, 15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[14, 15, 17, 18]</TD>
 </TR>
 </TABLE>>];N26 -> N32;
 N33[shape = none label=<
@@ -394,7 +394,7 @@ N33[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[13, 15]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[13, 15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[14, 15, 17, 18]</TD>
 </TR>
 </TABLE>>];N32 -> N33;
 N34[shape = none label=<
@@ -403,9 +403,9 @@ N34[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[13, 15]</TD>
+<TD bgcolor="palegreen1">[13, 15, 13, 15, 19]</TD>
 <TD>|</TD>
-<TD bgcolor = "hotpink1">[13, 15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[14, 15, 17, 18]</TD>
 </TR>
 </TABLE>>];N33 -> N34;
 N35[shape = none label=<
@@ -416,7 +416,7 @@ N35[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[13]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[13]</TD>
+<TD bgcolor = "hotpink1">[14]</TD>
 </TR>
 </TABLE>>];N34 -> N35;
 N36[shape = none label=<
@@ -455,7 +455,7 @@ N38[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[15]</TD>
 <TD>+</TD>
-<TD bgcolor = "hotpink1">[15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[15, 17, 18]</TD>
 </TR>
 </TABLE>>];N34 -> N38;
 N39[shape = none label=<
@@ -466,7 +466,7 @@ N39[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[15]</TD>
 <TD>+</TD>
-<TD bgcolor = "hotpink1">[15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[15, 17, 18]</TD>
 </TR>
 </TABLE>>];N38 -> N39;
 N40[shape = none label=<
@@ -477,7 +477,7 @@ N40[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[15]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[15, 16, 18]</TD>
+<TD bgcolor = "hotpink1">[15, 17, 18]</TD>
 </TR>
 </TABLE>>];N39 -> N40;
 N41[shape = none label=<
@@ -500,9 +500,9 @@ N42[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">true</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[16, 18]</TD>
+<TD bgcolor="palegreen1">[16, 18, 15, 15, 13, 15, 13, 15, 19]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[16, 18]</TD>
+<TD bgcolor = "hotpink1">[17, 18]</TD>
 </TR>
 </TABLE>>];N40 -> N42;
 N43[shape = none label=<
@@ -513,7 +513,7 @@ N43[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[16, 18]</TD>
 <TD>*</TD>
-<TD bgcolor = "hotpink1">[16, 18]</TD>
+<TD bgcolor = "hotpink1">[17, 18]</TD>
 </TR>
 </TABLE>>];N42 -> N43;
 N44[shape = none label=<
@@ -522,9 +522,9 @@ N44[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[16, 18]</TD>
+<TD bgcolor="palegreen1">[16, 18, 16, 18, 16, 18, 15, 15, 15, 15, 13, 15, 13, 15, 13, 15, 13, 15, 19, 19]</TD>
 <TD>|</TD>
-<TD bgcolor = "hotpink1">[16, 18]</TD>
+<TD bgcolor = "hotpink1">[17, 18]</TD>
 </TR>
 </TABLE>>];N43 -> N44;
 N45[shape = none label=<
@@ -535,7 +535,7 @@ N45[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[16]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[16]</TD>
+<TD bgcolor = "hotpink1">[17]</TD>
 </TR>
 </TABLE>>];N44 -> N45;
 N46[shape = none label=<

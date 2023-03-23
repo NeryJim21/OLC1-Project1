@@ -10,6 +10,7 @@ package metodoArbol;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class MetodoArbol {
     public Nodo arbolExpresiones;
@@ -30,7 +31,8 @@ public class MetodoArbol {
         numNodo = 0;
 //        ArrayList <ArrayList> tablaSiguientes = new ArrayList<>();
         anulables(this.arbolExpresiones);
-        System.out.println("Tabla siguientes:"+tablaSiguientes);
+        //System.out.println("Tabla siguientes:"+tablaSiguientes);
+        imprimirSiguientes();
         //System.out.println(crearArbol(this.arbolExpresiones,numNodo));
         generarDot(crearArbol(this.arbolExpresiones,numNodo),Integer.toString(numDot));
         numDot++;
@@ -78,36 +80,44 @@ public class MetodoArbol {
                     actual.getUltimos().addAll(actual.getHijoIzq().getUltimos());
                     actual.getUltimos().addAll(actual.getHijoDer().getUltimos());
                 }else{
-                    actual.getUltimos().addAll(actual.getHijoIzq().getUltimos());
+                    actual.getUltimos().addAll(actual.getHijoDer().getUltimos()); //Validar que esté correcto
                 }
-                
-                if(!"#".equals(actual.getHijoDer().getToken())){
-                    //Creando tabla de siguientes
-                    ArrayList<Integer> follow = new ArrayList<>();
-                    follow = actual.getHijoIzq().getUltimos();
-                    ArrayList<Integer> listaFollow = new ArrayList<>();
-                    listaFollow = actual.getHijoDer().getPrimeros();
-                    String token = actual.getHijoIzq().getToken();
-                    for(int item : follow){
+                //Creando tabla de siguientes
+                ArrayList<Integer> follow = new ArrayList<>();
+                follow = actual.getHijoIzq().getUltimos();
+                ArrayList<Integer> listaFollow = new ArrayList<>();
+                listaFollow = actual.getHijoDer().getPrimeros();
+                String token = actual.getHijoIzq().getToken();
+                boolean alerta = false;
+                for(int item : follow){
+                    if(tablaSiguientes != null){
+                        for (ArrayList ts : tablaSiguientes) {
+                            if(ts.get(1).equals(item)){
+                                ArrayList<Integer> pivL = (ArrayList<Integer>) ts.get(2);
+                                for(int pivItem : listaFollow){
+                                    pivL.add(pivItem);
+                                }
+                                ts.set(2, pivL);
+                                alerta = true;
+                            }
+                        }
+                    }
+                    if(alerta != true){
                         ArrayList tabla = new ArrayList();
                         tabla.add(token);
                         tabla.add(item);
                         tabla.add(listaFollow);
                         tablaSiguientes.add(tabla);
                     }
-                }else{
+                    alerta = false;
+                }
+               if("#".equals(actual.getHijoDer().getToken())){
                     //Creando tabla de siguientes
-                    ArrayList<Integer> follow = new ArrayList<>();
-                    follow = actual.getHijoIzq().getUltimos();
-                    ArrayList<Integer> listaFollow = new ArrayList<>();
-                    listaFollow = actual.getHijoDer().getPrimeros();
-                    for(int item : follow){
-                        ArrayList tabla = new ArrayList();
-                        tabla.add("#");
-                        tabla.add(item);
-                        tabla.add("--");
-                        tablaSiguientes.add(tabla);
-                    }
+                    ArrayList tabla = new ArrayList();
+                    tabla.add("#");
+                    tabla.add(actual.getHijoDer().getUltimos());
+                    tabla.add("--");
+                    tablaSiguientes.add(tabla);
                 }
                 break;
             case "*":
@@ -115,17 +125,33 @@ public class MetodoArbol {
                 actual.getPrimeros().addAll(actual.getHijoIzq().getPrimeros());
                 actual.getUltimos().addAll(actual.getHijoIzq().getUltimos());
                 //Creando tabla de siguientes
-                 ArrayList<Integer> follow = new ArrayList<>();
-                 follow = actual.getHijoIzq().getUltimos();
-                 ArrayList<Integer> listaFollow = new ArrayList<>();
-                 listaFollow = actual.getHijoIzq().getPrimeros();
-                 String token = actual.getHijoIzq().getToken();
-                 for(int item : follow){
-                     ArrayList tabla = new ArrayList();
-                     tabla.add(token);
-                     tabla.add(item);
-                     tabla.add(listaFollow);
-                     tablaSiguientes.add(tabla);
+                 ArrayList<Integer> follow1 = new ArrayList<>();
+                 follow1 = actual.getHijoIzq().getUltimos();
+                 ArrayList<Integer> listaFollow1 = new ArrayList<>();
+                 listaFollow1 = actual.getHijoIzq().getPrimeros();
+                 String token1 = actual.getHijoIzq().getToken();
+                 boolean alerta1 = false;
+                 for(int item : follow1){
+                     if(tablaSiguientes != null){
+                        for (ArrayList ts : tablaSiguientes) {
+                            if(ts.get(1).equals(item)){
+                                ArrayList<Integer> pivL = (ArrayList<Integer>) ts.get(2);
+                                for(int pivItem : listaFollow1){
+                                    pivL.add(pivItem);
+                                }
+                                ts.set(2, pivL);
+                                alerta1 = true;
+                            }
+                        }
+                    }
+                        if(alerta1 != true){
+                           ArrayList tabla = new ArrayList();
+                           tabla.add(token1);
+                           tabla.add(item);
+                           tabla.add(listaFollow1);
+                           tablaSiguientes.add(tabla);    
+                        }
+                        alerta1 = false;
                     }
                 break;
             case "+":
@@ -133,18 +159,34 @@ public class MetodoArbol {
                 actual.getPrimeros().addAll(actual.getHijoIzq().getPrimeros());
                 actual.getUltimos().addAll(actual.getHijoIzq().getUltimos());
                 //Creando tabla de siguientes
-                ArrayList<Integer> flw = new ArrayList<>();
-                flw = actual.getHijoIzq().getUltimos();
-                ArrayList<Integer> listFollow = new ArrayList<>();
-                listFollow = actual.getHijoIzq().getPrimeros();
-                String tokn = actual.getHijoIzq().getToken();
-                for(int item : flw){
-                    ArrayList tabla = new ArrayList();
-                    tabla.add(tokn);
-                    tabla.add(item);
-                    tabla.add(listFollow);
-                    tablaSiguientes.add(tabla);
-                }
+                 ArrayList<Integer> follow2 = new ArrayList<>();
+                 follow2 = actual.getHijoIzq().getUltimos();
+                 ArrayList<Integer> listaFollow2 = new ArrayList<>();
+                 listaFollow2 = actual.getHijoIzq().getPrimeros();
+                 String token2 = actual.getHijoIzq().getToken();
+                 boolean alerta2 = false;
+                 for(int item : follow2){
+                     if(tablaSiguientes != null){
+                        for (ArrayList ts : tablaSiguientes) {
+                            if(ts.get(1).equals(item)){
+                                ArrayList<Integer> pivL = (ArrayList<Integer>) ts.get(2);
+                                for(int pivItem : listaFollow2){
+                                    pivL.add(pivItem);
+                                }
+                                ts.set(2, pivL);
+                                alerta2 = true;
+                            }
+                        }
+                    }
+                        if(alerta2 != true){
+                           ArrayList tabla = new ArrayList();
+                           tabla.add(token2);
+                           tabla.add(item);
+                           tabla.add(listaFollow2);
+                           tablaSiguientes.add(tabla);    
+                        }
+                        alerta2 = false;
+                    }
                   
                 break;
             case "|":
@@ -248,6 +290,12 @@ public class MetodoArbol {
             System.out.println("Error al generar la imagen JPG");
         }
         
+    }
+    
+    public void imprimirSiguientes(){
+        for(int i = 0; i<tablaSiguientes.size();i++){
+            System.out.println(tablaSiguientes.get(i));
+        }
     }
     
 }
