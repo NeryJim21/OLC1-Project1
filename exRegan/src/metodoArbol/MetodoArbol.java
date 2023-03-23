@@ -32,7 +32,7 @@ public class MetodoArbol {
 //        ArrayList <ArrayList> tablaSiguientes = new ArrayList<>();
         anulables(this.arbolExpresiones);
         //System.out.println("Tabla siguientes:"+tablaSiguientes);
-        imprimirSiguientes();
+        imprimirSiguientes(Integer.toString(numDot));
         //System.out.println(crearArbol(this.arbolExpresiones,numNodo));
         generarDot(crearArbol(this.arbolExpresiones,numNodo),Integer.toString(numDot));
         numDot++;
@@ -285,16 +285,60 @@ public class MetodoArbol {
             rt.exec(imprimir);
             System.out.println(imprimir);
             Thread.sleep(500);
-            System.out.println("JPG Generado");
+            System.out.println("JPG Arbol Generado");
         }catch(Exception ex){
             System.out.println("Error al generar la imagen JPG");
         }
         
     }
     
-    public void imprimirSiguientes(){
-        for(int i = 0; i<tablaSiguientes.size();i++){
-            System.out.println(tablaSiguientes.get(i));
+    public void imprimirSiguientes(String i){
+        String txt = "";
+        txt += "digraph { \n tbl1 [\n"+
+                "shape=plaintext\n" +
+                " label=<\n" +
+                "<table border='0' cellborder='1' cellspacing='0'>\n"+
+                "<tr><td colspan=\"2\">TABLA DE SIGUIENTES</td></tr>\n" +
+                "<th><td>Hoja</td><td>Siguientes</td></th>"+
+                "";       
+        for(ArrayList ts : tablaSiguientes){
+            txt += "<tr><td bgcolor=\"#fcc8c8\">"+ts.get(1)+"</td><td bgcolor=\"#fcc8c8\">"+ts.get(2)+"</td></tr>\n";
+            //System.out.println(tablaSiguientes.get(i));
+        }
+        
+        txt += "</table>\n" +
+                  ">];\n" +
+                  "}";
+    
+        //Generando DOT
+        FileWriter fichero = null;
+        PrintWriter escritor = null;
+        String path = "/home/n21/Documentos/USAC/OLC1/LAB/PROYECTOS/PROYECTO1/repo/OLC1-Project1/SIGUIENTES_201700381/";
+        String name = "";
+        String nameJPG = "";
+        try{
+            
+            name +="Siguientes"+i+".dot";
+            nameJPG ="Siguientes"+i+".jpg";
+            path += name;
+            fichero = new FileWriter(path);
+            escritor = new PrintWriter(fichero);
+            escritor.println(txt);
+            escritor.close();
+            fichero.close();
+        } catch(Exception e){
+            System.out.println("Error al generar .dot");
+        }
+        
+        try{
+            Runtime rt = Runtime.getRuntime();
+            String imprimir = " dot -Tjpg  "+name + " -o "+nameJPG; 
+            rt.exec(imprimir);
+            System.out.println(imprimir);
+            Thread.sleep(500);
+            System.out.println("JPG Tabla Siguientes Generado");
+        }catch(Exception ex){
+            System.out.println("Error al generar la imagen JPG");
         }
     }
     

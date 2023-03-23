@@ -1,0 +1,14 @@
+digraph { 
+ tbl1 [
+shape=plaintext
+ label=<
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td colspan="2">TABLA DE SIGUIENTES</td></tr>
+<th><td>Hoja</td><td>Siguientes</td></th><tr><td bgcolor="#fcc8c8">2</td><td bgcolor="#fcc8c8">[2, 3, 4, 4]</td></tr>
+<tr><td bgcolor="#fcc8c8">3</td><td bgcolor="#fcc8c8">[2, 3, 4, 4]</td></tr>
+<tr><td bgcolor="#fcc8c8">1</td><td bgcolor="#fcc8c8">[2, 3, 4]</td></tr>
+<tr><td bgcolor="#fcc8c8">4</td><td bgcolor="#fcc8c8">[5]</td></tr>
+<tr><td bgcolor="#fcc8c8">[5]</td><td bgcolor="#fcc8c8">--</td></tr>
+</table>
+>];
+}
