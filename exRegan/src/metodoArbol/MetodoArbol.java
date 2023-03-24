@@ -10,6 +10,7 @@ package metodoArbol;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class MetodoArbol {
@@ -299,6 +300,11 @@ public class MetodoArbol {
     }
     
     public void imprimirSiguientes(String i){
+        
+        //Ordenar ascendente
+       //Collections.sort(tablaSiguientes, (ArrayList a, ArrayList b) -> ((Integer) a.get(1)).compareTo((Integer) b.get(1)));
+
+        System.out.println(tablaSiguientes);
         String txt = "";
         txt += "digraph { \n tbl1 [\n"+
                 "shape=plaintext\n" +
@@ -348,4 +354,7 @@ public class MetodoArbol {
         }
     }
     
+    public void tablaTransiciones(){
+        
+    }
 }
