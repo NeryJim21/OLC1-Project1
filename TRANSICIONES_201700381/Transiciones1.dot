@@ -1,0 +1,11 @@
+igraph {
+tbl [
+shape=plaintext
+ label=<
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td colspan="3">TABLA TRANSICIONES</td></tr>
+<th><td>Estado</td><td>Terminales</td><td>Terminales</td></th><tr><td bgcolor="lightblue">S0{1}</td><td bgcolor="lightblue">S1</td><td bgcolor="lightblue">--</td></tr>
+<tr><td bgcolor="lightblue">S1{2,3,4}</td><td bgcolor="lightblue">S1</td><td bgcolor="lightblue">S2</td></tr>
+<tr><td bgcolor="lightblue">S2{2,3,4,5}</td><td bgcolor="lightblue">S1</td><td bgcolor="lightblue">S2</td></tr></table>
+>];
+}

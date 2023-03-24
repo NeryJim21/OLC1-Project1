@@ -34,6 +34,7 @@ public class MetodoArbol {
         anulables(this.arbolExpresiones);
         //System.out.println("Tabla siguientes:"+tablaSiguientes);
         imprimirSiguientes(Integer.toString(numDot));
+        tablaTransiciones(Integer.toString(numDot));
         //System.out.println(crearArbol(this.arbolExpresiones,numNodo));
         generarDot(crearArbol(this.arbolExpresiones,numNodo),Integer.toString(numDot));
         numDot++;
@@ -354,7 +355,55 @@ public class MetodoArbol {
         }
     }
     
-    public void tablaTransiciones(){
+    public void tablaTransiciones(String i){
         
+        
+        String txt = "";
+        txt += "Digraph {\n" +
+                "tbl [\n" +
+                "shape=plaintext\n" +
+                " label=<\n" +
+                "<table border='0' cellborder='1' cellspacing='0'>\n" +
+                "<tr><td colspan=\"3\">TABLA TRANSICIONES</td></tr>\n" +
+                "<th><td>Estado</td><td>Terminales</td><td>Terminales</td></th>";
+        
+        txt += "<tr><td bgcolor=\"lightblue\">S0{1}</td><td bgcolor=\"lightblue\">S1</td><td bgcolor=\"lightblue\">--</td></tr>\n" +
+                "<tr><td bgcolor=\"lightblue\">S1{2,3,4}</td><td bgcolor=\"lightblue\">S1</td><td bgcolor=\"lightblue\">S2</td></tr>\n" +
+                "<tr><td bgcolor=\"lightblue\">S2{2,3,4,5}</td><td bgcolor=\"lightblue\">S1</td><td bgcolor=\"lightblue\">S2</td></tr>";
+    
+        txt += "</table>\n" +
+                ">];\n" +
+                "}";
+        
+         //Generando DOT
+        FileWriter fichero = null;
+        PrintWriter escritor = null;
+        String path = "/home/n21/Documentos/USAC/OLC1/LAB/PROYECTOS/PROYECTO1/repo/OLC1-Project1/TRANSICIONES_201700381/";
+        String name = "";
+        String nameJPG = "";
+        try{
+            
+            name +="Transiciones"+i+".dot";
+            nameJPG ="Transiciones"+i+".jpg";
+            path += name;
+            fichero = new FileWriter(path);
+            escritor = new PrintWriter(fichero);
+            escritor.println(txt);
+            escritor.close();
+            fichero.close();
+        } catch(Exception e){
+            System.out.println("Error al generar .dot");
+        }
+        
+        try{
+            Runtime rt = Runtime.getRuntime();
+            String imprimir = " dot -Tjpg  "+name + " -o "+nameJPG; 
+            rt.exec(imprimir);
+            System.out.println(imprimir);
+            Thread.sleep(500);
+            System.out.println("JPG Tabla Transiciones Generado");
+        }catch(Exception ex){
+            System.out.println("Error al generar la imagen JPG");
+        }
     }
 }
