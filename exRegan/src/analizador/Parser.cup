@@ -39,7 +39,7 @@ parser code
 terminal String DOSPUNTOS, PTCOMA,LLAVABRE,LLAVCIERRA;
 terminal String MAS,POR, PORCENTAJE;
 terminal String DECIMAL, ID, ASCII;
-terminal String PR_CONJ, FLECHA, COLOCHO, PUNTO, OR, COMA, INTERROG, LN, COMSIMPLE;
+terminal String PR_CONJ, MENOS, MAYOR, COLOCHO, PUNTO, OR, COMA, INTERROG, LN, COMSIMPLE;
 terminal String COMDOBLE, COMILLA;
 
 non terminal ini, cuerpo, conjunto, definicion, expresion, cuerpoExpresion, especiales, definido;
@@ -58,7 +58,7 @@ cuerpo ::= conjunto:a
                 | cuerpo error
 ;
 
-conjunto ::= PR_CONJ:a DOSPUNTOS:b ID:c FLECHA:d definicion:e PTCOMA:f
+conjunto ::= PR_CONJ:a DOSPUNTOS:b ID:c MENOS:d MAYOR:e definicion:f PTCOMA:g
                   | error PTCOMA
 ;
 
@@ -104,9 +104,15 @@ asciiComplement ::= PORCENTAJE:a {:
                                 | INTERROG:a {:
                                     RESULT = a;
                                 :}
+                                | MENOS:a {:
+                                    RESULT = a;
+                                :}
+                                | MAYOR:a {:
+                                    RESULT = a;
+                                :}
 ;
 
-expresion ::= ID:a FLECHA:b cuerpoExpresion:c PTCOMA:d {:
+expresion ::= ID:a MENOS MAYOR:b cuerpoExpresion:c PTCOMA:d {:
                         arboles.add(new MetodoArbol((Nodo)c));
                     :}
 ;
@@ -224,7 +230,15 @@ simbolos ::=  PORCENTAJE:a {:
                     | OR:a {:
                         RESULT = a;
                     :}
-                    | INTERROG:a
+                    | INTERROG:a{:
+                        RESULT = a;
+                    :}
+                    | MENOS:a{:
+                        RESULT = a;
+                    :}
+                    | MAYOR:a{:
+                        RESULT = a;
+                    :}
 ;
 
 asciiSymb ::= ASCII:a {:

@@ -8,24 +8,25 @@ package analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int PUNTO = 15;
+  public static final int MENOS = 13;
+  public static final int PUNTO = 16;
   public static final int DOSPUNTOS = 2;
-  public static final int INTERROG = 18;
-  public static final int OR = 16;
+  public static final int INTERROG = 19;
+  public static final int OR = 17;
   public static final int DECIMAL = 9;
-  public static final int LN = 19;
-  public static final int COMDOBLE = 21;
-  public static final int FLECHA = 13;
-  public static final int COLOCHO = 14;
+  public static final int LN = 20;
+  public static final int COMDOBLE = 22;
+  public static final int COLOCHO = 15;
   public static final int ID = 10;
   public static final int POR = 7;
-  public static final int COMSIMPLE = 20;
+  public static final int COMSIMPLE = 21;
   public static final int PORCENTAJE = 8;
-  public static final int COMA = 17;
+  public static final int COMA = 18;
   public static final int PR_CONJ = 12;
   public static final int LLAVABRE = 4;
+  public static final int MAYOR = 14;
   public static final int EOF = 0;
-  public static final int COMILLA = 22;
+  public static final int COMILLA = 23;
   public static final int error = 1;
   public static final int LLAVCIERRA = 5;
   public static final int ASCII = 11;
@@ -45,7 +46,8 @@ public class sym {
   "ID",
   "ASCII",
   "PR_CONJ",
-  "FLECHA",
+  "MENOS",
+  "MAYOR",
   "COLOCHO",
   "PUNTO",
   "OR",

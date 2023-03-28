@@ -1,0 +1,17 @@
+digraph { 
+ tbl1 [
+shape=plaintext
+ label=<
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td colspan="3">TABLA DE SIGUIENTES</td></tr>
+<th><td>Simbolo</td><td>Hoja</td><td>Siguientes</td></th><tr><td bgcolor="#fcc8c8">\'</td><td bgcolor="#fcc8c8">1</td><td bgcolor="#fcc8c8">[2, 3, 4, 5, 6]</td></tr>
+<tr><td bgcolor="#fcc8c8">\n</td><td bgcolor="#fcc8c8">2</td><td bgcolor="#fcc8c8">[2, 3, 4, 5, 6, 7]</td></tr>
+<tr><td bgcolor="#fcc8c8">minus</td><td bgcolor="#fcc8c8">3</td><td bgcolor="#fcc8c8">[2, 3, 4, 5, 6, 7]</td></tr>
+<tr><td bgcolor="#fcc8c8">mayus</td><td bgcolor="#fcc8c8">4</td><td bgcolor="#fcc8c8">[2, 3, 4, 5, 6, 7]</td></tr>
+<tr><td bgcolor="#fcc8c8">digito</td><td bgcolor="#fcc8c8">5</td><td bgcolor="#fcc8c8">[2, 3, 4, 5, 6, 7]</td></tr>
+<tr><td bgcolor="#fcc8c8">_</td><td bgcolor="#fcc8c8">6</td><td bgcolor="#fcc8c8">[2, 3, 4, 5, 6, 7]</td></tr>
+<tr><td bgcolor="#fcc8c8">\'</td><td bgcolor="#fcc8c8">7</td><td bgcolor="#fcc8c8">[8]</td></tr>
+<tr><td bgcolor="#fcc8c8">#</td><td bgcolor="#fcc8c8">8</td><td bgcolor="#fcc8c8">--</td></tr>
+</table>
+>];
+}

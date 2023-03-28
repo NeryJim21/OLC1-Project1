@@ -38,6 +38,7 @@ ID = ({LETRA}|("_"{LETRA}))({LETRA}|{ENTERO}|"_")*
 UNILINEA = ("//".*\r\n)|("//".*\n)|("//".*\r)
 MULTILINEA = "<!""<"*([^*<]|[^*]"!"|"*"[^!])*"*"*"!>"
 ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
+FLECHA = "-"">"
 
 %%
 
@@ -53,7 +54,9 @@ ASCII = [!-/]|[:-@]|[\[-`]|[{-~]
 
 "+" {return new Symbol(sym.MAS, yyline, yychar, yytext());} 
 "*" {return new Symbol(sym.POR, yyline, yychar, yytext());} 
-"->" {return new Symbol(sym.FLECHA, yyline, yychar, yytext());}
+//"->" {return new Symbol(sym.FLECHA, yyline, yychar, yytext());}
+"-" {return new Symbol(sym.MENOS, yyline, yychar, yytext());}
+">" {return new Symbol(sym.MAYOR, yyline, yychar, yytext());}
 "~" {return new Symbol(sym.COLOCHO, yyline, yychar, yytext());}
 "." {return new Symbol(sym.PUNTO, yyline, yychar, yytext());} 
 

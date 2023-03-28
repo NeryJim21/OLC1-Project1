@@ -1,0 +1,14 @@
+Digraph {
+tbl [
+shape=plaintext
+ label=<
+<table border='0' cellborder='1' cellspacing='0'>
+<tr><td colspan="8">TABLA TRANSICIONES</td></tr>
+<th><td>Estado</td><td> \'</td><td> \n</td><td> minus</td><td> mayus</td><td> digito</td><td> _</td><td> \'</td></th
+><tr><td bgcolor="lightblue">S0[1]</td><td bgcolor="lightblue">S1</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td></tr>
+<tr><td bgcolor="lightblue">S1[2, 3, 4, 5, 6]</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">S2</td><td bgcolor="lightblue">S2</td><td bgcolor="lightblue">S2</td><td bgcolor="lightblue">S2</td><td bgcolor="lightblue">S2</td><td bgcolor="lightblue">--</td></tr>
+<tr><td bgcolor="lightblue">S2[2, 3, 4, 5, 6, 7]</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">S3</td></tr>
+<tr><td bgcolor="lightblue">S3[8]</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">--</td><td bgcolor="lightblue">S3</td></tr>
+</table>
+>];
+}

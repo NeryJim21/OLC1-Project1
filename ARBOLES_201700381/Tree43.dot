@@ -7,7 +7,7 @@ N1[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[1]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[9]</TD>
+<TD bgcolor = "hotpink1">[8]</TD>
 </TR>
 </TABLE>>];N2[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
@@ -17,7 +17,7 @@ N1[shape = none label=<
  <TR>
 <TD bgcolor="palegreen1">[1]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[8]</TD>
+<TD bgcolor = "hotpink1">[7]</TD>
 </TR>
 </TABLE>>];N1 -> N2;
 N3[shape = none label=<
@@ -27,7 +27,7 @@ N3[shape = none label=<
  </TR>
  <TR>
 <TD bgcolor="palegreen1">[1]</TD>
-<TD>posibless</TD>
+<TD>\'</TD>
 <TD bgcolor = "hotpink1">[1]</TD>
 </TR>
  <TR>
@@ -40,20 +40,20 @@ N4[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[2, 3]</TD>
+<TD bgcolor="palegreen1">[2, 3, 4, 5, 6]</TD>
 <TD>.</TD>
-<TD bgcolor = "hotpink1">[8]</TD>
+<TD bgcolor = "hotpink1">[7]</TD>
 </TR>
 </TABLE>>];N2 -> N4;
 N5[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
  <TR>
- <TD colspan="3" bgcolor="lightsalmon">true</TD>
+ <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[2]</TD>
-<TD>?</TD>
-<TD bgcolor = "hotpink1">[2]</TD>
+<TD bgcolor="palegreen1">[2, 3, 4, 5, 6]</TD>
+<TD>+</TD>
+<TD bgcolor = "hotpink1">[2, 3, 4, 5, 6]</TD>
 </TR>
 </TABLE>>];N4 -> N5;
 N6[shape = none label=<
@@ -62,12 +62,9 @@ N6[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[2]</TD>
-<TD>-</TD>
-<TD bgcolor = "hotpink1">[2]</TD>
-</TR>
- <TR>
-<TD colspan="3" bgcolor="lemonchiffon1"> 2</TD>
+<TD bgcolor="palegreen1">[2, 3, 4, 5, 6, 7]</TD>
+<TD>|</TD>
+<TD bgcolor = "hotpink1">[2, 3, 4, 5, 6]</TD>
 </TR>
 </TABLE>>];N5 -> N6;
 N7[shape = none label=<
@@ -76,23 +73,20 @@ N7[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[3]</TD>
-<TD>.</TD>
-<TD bgcolor = "hotpink1">[8]</TD>
+<TD bgcolor="palegreen1">[2, 3, 4, 5]</TD>
+<TD>|</TD>
+<TD bgcolor = "hotpink1">[2, 3, 4, 5]</TD>
 </TR>
-</TABLE>>];N4 -> N7;
+</TABLE>>];N6 -> N7;
 N8[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
  <TR>
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[3]</TD>
-<TD>digito</TD>
-<TD bgcolor = "hotpink1">[3]</TD>
-</TR>
- <TR>
-<TD colspan="3" bgcolor="lemonchiffon1"> 3</TD>
+<TD bgcolor="palegreen1">[2, 3, 4]</TD>
+<TD>|</TD>
+<TD bgcolor = "hotpink1">[2, 3, 4]</TD>
 </TR>
 </TABLE>>];N7 -> N8;
 N9[shape = none label=<
@@ -101,23 +95,23 @@ N9[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[4]</TD>
-<TD>.</TD>
-<TD bgcolor = "hotpink1">[8]</TD>
+<TD bgcolor="palegreen1">[2, 3]</TD>
+<TD>|</TD>
+<TD bgcolor = "hotpink1">[2, 3]</TD>
 </TR>
-</TABLE>>];N7 -> N9;
+</TABLE>>];N8 -> N9;
 N10[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
  <TR>
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[4]</TD>
-<TD>digito</TD>
-<TD bgcolor = "hotpink1">[4]</TD>
+<TD bgcolor="palegreen1">[2]</TD>
+<TD>\n</TD>
+<TD bgcolor = "hotpink1">[2]</TD>
 </TR>
  <TR>
-<TD colspan="3" bgcolor="lemonchiffon1"> 4</TD>
+<TD colspan="3" bgcolor="lemonchiffon1"> 2</TD>
 </TR>
 </TABLE>>];N9 -> N10;
 N11[shape = none label=<
@@ -126,12 +120,29 @@ N11[shape = none label=<
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[5]</TD>
-<TD>.</TD>
-<TD bgcolor = "hotpink1">[8]</TD>
+<TD bgcolor="palegreen1">[3]</TD>
+<TD>minus</TD>
+<TD bgcolor = "hotpink1">[3]</TD>
+</TR>
+ <TR>
+<TD colspan="3" bgcolor="lemonchiffon1"> 3</TD>
 </TR>
 </TABLE>>];N9 -> N11;
 N12[shape = none label=<
+ <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
+ <TR>
+ <TD colspan="3" bgcolor="lightsalmon">false</TD>
+ </TR>
+ <TR>
+<TD bgcolor="palegreen1">[4]</TD>
+<TD>mayus</TD>
+<TD bgcolor = "hotpink1">[4]</TD>
+</TR>
+ <TR>
+<TD colspan="3" bgcolor="lemonchiffon1"> 4</TD>
+</TR>
+</TABLE>>];N8 -> N12;
+N13[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
  <TR>
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
@@ -144,18 +155,7 @@ N12[shape = none label=<
  <TR>
 <TD colspan="3" bgcolor="lemonchiffon1"> 5</TD>
 </TR>
-</TABLE>>];N11 -> N12;
-N13[shape = none label=<
- <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
- <TR>
- <TD colspan="3" bgcolor="lightsalmon">false</TD>
- </TR>
- <TR>
-<TD bgcolor="palegreen1">[6]</TD>
-<TD>.</TD>
-<TD bgcolor = "hotpink1">[8]</TD>
-</TR>
-</TABLE>>];N11 -> N13;
+</TABLE>>];N7 -> N13;
 N14[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
  <TR>
@@ -163,13 +163,13 @@ N14[shape = none label=<
  </TR>
  <TR>
 <TD bgcolor="palegreen1">[6]</TD>
-<TD>letra</TD>
+<TD>_</TD>
 <TD bgcolor = "hotpink1">[6]</TD>
 </TR>
  <TR>
 <TD colspan="3" bgcolor="lemonchiffon1"> 6</TD>
 </TR>
-</TABLE>>];N13 -> N14;
+</TABLE>>];N6 -> N14;
 N15[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
  <TR>
@@ -177,51 +177,26 @@ N15[shape = none label=<
  </TR>
  <TR>
 <TD bgcolor="palegreen1">[7]</TD>
-<TD>.</TD>
-<TD bgcolor = "hotpink1">[8]</TD>
+<TD>\'</TD>
+<TD bgcolor = "hotpink1">[7]</TD>
 </TR>
-</TABLE>>];N13 -> N15;
+ <TR>
+<TD colspan="3" bgcolor="lemonchiffon1"> 7</TD>
+</TR>
+</TABLE>>];N4 -> N15;
 N16[shape = none label=<
  <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
  <TR>
  <TD colspan="3" bgcolor="lightsalmon">false</TD>
  </TR>
  <TR>
-<TD bgcolor="palegreen1">[7]</TD>
-<TD>letra</TD>
-<TD bgcolor = "hotpink1">[7]</TD>
-</TR>
- <TR>
-<TD colspan="3" bgcolor="lemonchiffon1"> 7</TD>
-</TR>
-</TABLE>>];N15 -> N16;
-N17[shape = none label=<
- <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
- <TR>
- <TD colspan="3" bgcolor="lightsalmon">false</TD>
- </TR>
- <TR>
 <TD bgcolor="palegreen1">[8]</TD>
-<TD>letra</TD>
+<TD>#</TD>
 <TD bgcolor = "hotpink1">[8]</TD>
 </TR>
  <TR>
 <TD colspan="3" bgcolor="lemonchiffon1"> 8</TD>
 </TR>
-</TABLE>>];N15 -> N17;
-N18[shape = none label=<
- <TABLE bgcolor = "aquamarine1" border= "1" cellspacing="2" cellpadding="10" >
- <TR>
- <TD colspan="3" bgcolor="lightsalmon">false</TD>
- </TR>
- <TR>
-<TD bgcolor="palegreen1">[9]</TD>
-<TD>#</TD>
-<TD bgcolor = "hotpink1">[9]</TD>
-</TR>
- <TR>
-<TD colspan="3" bgcolor="lemonchiffon1"> 9</TD>
-</TR>
-</TABLE>>];N1 -> N18;
+</TABLE>>];N1 -> N16;
 
  }

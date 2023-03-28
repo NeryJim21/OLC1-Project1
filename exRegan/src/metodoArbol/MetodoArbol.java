@@ -10,8 +10,10 @@ package metodoArbol;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 public class MetodoArbol {
     public Nodo arbolExpresiones;
@@ -19,8 +21,11 @@ public class MetodoArbol {
     public int numDot = 1;
     //public ArrayList tablaSiguientes;
     ArrayList <ArrayList> tablaSiguientes = new ArrayList<>();
+     ArrayList <ArrayList> tablaOrdenada = new ArrayList<>();
+     ArrayList <ArrayList> tablaTransiciones = new ArrayList<>();
     
     public MetodoArbol(Nodo arbolExpresiones) {
+        numDot = numRand();
         Nodo raiz = new Nodo(".");
         Nodo acepta = new Nodo("#");
         acepta.setHoja(true);
@@ -30,14 +35,20 @@ public class MetodoArbol {
         this.arbolExpresiones = raiz;
         asignarIndice(this.arbolExpresiones);
         numNodo = 0;
-//        ArrayList <ArrayList> tablaSiguientes = new ArrayList<>();
         anulables(this.arbolExpresiones);
-        //System.out.println("Tabla siguientes:"+tablaSiguientes);
         imprimirSiguientes(Integer.toString(numDot));
-        tablaTransiciones(Integer.toString(numDot));
-        //System.out.println(crearArbol(this.arbolExpresiones,numNodo));
+        ArrayList<Integer> primeros = raiz.getPrimeros();
+        tablaTransicion(primeros,Integer.toString(numDot));
         generarDot(crearArbol(this.arbolExpresiones,numNodo),Integer.toString(numDot));
         numDot++;
+    }
+    
+    public int numRand(){
+        int min = 1;
+        int max = 100;
+        Random random = new Random();
+        int numR = random.nextInt(max - min + 1) + min;
+        return numR;
     }
     
     public void asignarIndice(Nodo actual){
@@ -89,7 +100,6 @@ public class MetodoArbol {
                 follow = actual.getHijoIzq().getUltimos();
                 ArrayList<Integer> listaFollow = new ArrayList<>();
                 listaFollow = actual.getHijoDer().getPrimeros();
-                String token = actual.getHijoIzq().getToken();
                 boolean alerta = false;
                 for(int item : follow){
                     if(tablaSiguientes != null){
@@ -108,6 +118,7 @@ public class MetodoArbol {
                     }
                     if(alerta != true){
                         ArrayList tabla = new ArrayList();
+                        String token = recorridoArbol(actual,item);
                         tabla.add(token);
                         tabla.add(item);
                         tabla.add(listaFollow);
@@ -119,7 +130,7 @@ public class MetodoArbol {
                     //Creando tabla de siguientes
                     ArrayList tabla = new ArrayList();
                     tabla.add("#");
-                    tabla.add(actual.getHijoDer().getUltimos());
+                    tabla.add(actual.getHijoDer().getUltimos().get(0));
                     tabla.add("--");
                     tablaSiguientes.add(tabla);
                 }
@@ -133,7 +144,6 @@ public class MetodoArbol {
                  follow1 = actual.getHijoIzq().getUltimos();
                  ArrayList<Integer> listaFollow1 = new ArrayList<>();
                  listaFollow1 = actual.getHijoIzq().getPrimeros();
-                 String token1 = actual.getHijoIzq().getToken();
                  boolean alerta1 = false;
                  for(int item : follow1){
                      if(tablaSiguientes != null){
@@ -152,6 +162,7 @@ public class MetodoArbol {
                     }
                         if(alerta1 != true){
                            ArrayList tabla = new ArrayList();
+                           String token1 = recorridoArbol(actual,item);
                            tabla.add(token1);
                            tabla.add(item);
                            tabla.add(listaFollow1);
@@ -169,7 +180,6 @@ public class MetodoArbol {
                  follow2 = actual.getHijoIzq().getUltimos();
                  ArrayList<Integer> listaFollow2 = new ArrayList<>();
                  listaFollow2 = actual.getHijoIzq().getPrimeros();
-                 String token2 = actual.getHijoIzq().getToken();
                  boolean alerta2 = false;
                  for(int item : follow2){
                      if(tablaSiguientes != null){
@@ -188,6 +198,7 @@ public class MetodoArbol {
                     }
                         if(alerta2 != true){
                            ArrayList tabla = new ArrayList();
+                           String token2 = recorridoArbol(actual,item);
                            tabla.add(token2);
                            tabla.add(item);
                            tabla.add(listaFollow2);
@@ -300,23 +311,50 @@ public class MetodoArbol {
         
     }
     
+    public String recorridoArbol(Nodo actual,int numHoja){
+        if(actual == null){
+            return "";
+        }
+        
+        if(actual.getHijoIzq() == null && actual.getHijoDer() == null && actual.getNum() == numHoja){
+            return String.valueOf(actual.getToken());
+        }
+        
+        String resultadoIzquierdo = recorridoArbol(actual.getHijoIzq(),numHoja);
+        
+        if(!resultadoIzquierdo.isEmpty()){
+            return /*String.valueOf(actual.getToken()) + */resultadoIzquierdo;
+        }
+        
+        String resultadoDerecho = recorridoArbol(actual.getHijoDer(),numHoja);
+        
+        if(!resultadoDerecho.isEmpty()){
+            return /*String.valueOf(actual.getToken()) + */resultadoDerecho;
+        }
+         return "";
+    }
+    
     public void imprimirSiguientes(String i){
         
         //Ordenar ascendente
-       //Collections.sort(tablaSiguientes, (ArrayList a, ArrayList b) -> ((Integer) a.get(1)).compareTo((Integer) b.get(1)));
-
-        System.out.println(tablaSiguientes);
+        for(int j = 1; j<=tablaSiguientes.size();j++){
+            for(ArrayList ts2 : tablaSiguientes){
+                if(ts2.get(1).equals(j)){
+                    tablaOrdenada.add(ts2);
+                }
+            }
+        }
+      
         String txt = "";
         txt += "digraph { \n tbl1 [\n"+
                 "shape=plaintext\n" +
                 " label=<\n" +
                 "<table border='0' cellborder='1' cellspacing='0'>\n"+
-                "<tr><td colspan=\"2\">TABLA DE SIGUIENTES</td></tr>\n" +
-                "<th><td>Hoja</td><td>Siguientes</td></th>"+
+                "<tr><td colspan=\"3\">TABLA DE SIGUIENTES</td></tr>\n" +
+                "<th><td>Simbolo</td><td>Hoja</td><td>Siguientes</td></th>"+
                 "";       
-        for(ArrayList ts : tablaSiguientes){
-            txt += "<tr><td bgcolor=\"#fcc8c8\">"+ts.get(1)+"</td><td bgcolor=\"#fcc8c8\">"+ts.get(2)+"</td></tr>\n";
-            //System.out.println(tablaSiguientes.get(i));
+        for(ArrayList ts : tablaOrdenada){
+            txt += "<tr><td bgcolor=\"#fcc8c8\">"+ts.get(0)+"</td><td bgcolor=\"#fcc8c8\">"+ts.get(1)+"</td><td bgcolor=\"#fcc8c8\">"+ts.get(2)+"</td></tr>\n";
         }
         
         txt += "</table>\n" +
@@ -355,8 +393,23 @@ public class MetodoArbol {
         }
     }
     
-    public void tablaTransiciones(String i){
-        
+    public void tablaTransicion(ArrayList<Integer> primeros, String i){
+        ArrayList <String> items = new ArrayList<>();
+        items.add("S0");
+        items.add(String.valueOf(primeros));
+        items.add("S1");
+        tablaTransiciones.add(items);
+        int contador = 0;
+        for(ArrayList to : tablaOrdenada){
+            if(!to.get(0).equals("#")){
+                ArrayList<Integer> pivote = (ArrayList<Integer>) to.get(2);
+                contador = armandoTransicion((int) to.get(1),contador);
+            } else {
+                break;
+            }
+            //contador++;
+        }
+        System.out.println("Tabla Transiciones: "+tablaTransiciones);
         
         String txt = "";
         txt += "Digraph {\n" +
@@ -364,12 +417,43 @@ public class MetodoArbol {
                 "shape=plaintext\n" +
                 " label=<\n" +
                 "<table border='0' cellborder='1' cellspacing='0'>\n" +
-                "<tr><td colspan=\"3\">TABLA TRANSICIONES</td></tr>\n" +
-                "<th><td>Estado</td><td>Terminales</td><td>Terminales</td></th>";
-        
-        txt += "<tr><td bgcolor=\"lightblue\">S0{1}</td><td bgcolor=\"lightblue\">S1</td><td bgcolor=\"lightblue\">--</td></tr>\n" +
-                "<tr><td bgcolor=\"lightblue\">S1{2,3,4}</td><td bgcolor=\"lightblue\">S1</td><td bgcolor=\"lightblue\">S2</td></tr>\n" +
-                "<tr><td bgcolor=\"lightblue\">S2{2,3,4,5}</td><td bgcolor=\"lightblue\">S1</td><td bgcolor=\"lightblue\">S2</td></tr>";
+                "<tr><td colspan=\""+tablaOrdenada.size()+"\">TABLA TRANSICIONES</td></tr>\n" +
+                "<th><td>Estado</td>";
+        for(ArrayList next : tablaOrdenada){
+            if(!next.get(0).equals("#")){
+                txt += "<td> "+next.get(0)+"</td>";
+            } 
+            
+        }
+        txt += "</th\n>";
+        txt += "<tr><td bgcolor=\"lightblue\">"+tablaTransiciones.get(0).get(0)+tablaTransiciones.get(0).get(1)+"</td>";
+        ArrayList<ArrayList> tt = new ArrayList<>();
+        for(int j = 1; j<tablaTransiciones.size();j++){
+            tt = tablaTransiciones.get(j);
+            for(int k = 0; k<tablaOrdenada.size()-1;k++){
+                System.out.println("1: "+String.valueOf(tablaOrdenada.get(k).get(2)));
+                System.out.println("2: "+tt.get(1));
+                if(String.valueOf(tablaOrdenada.get(k).get(2)).equals(tt.get(1))){
+                    txt += "<td bgcolor=\"lightblue\">"+tt.get(0)+"</td>";
+                }else{
+                    txt += "<td bgcolor=\"lightblue\">--</td>";
+                }
+                
+            }
+            txt += "</tr>\n";
+            
+            txt += "<tr><td bgcolor=\"lightblue\">"+tt.get(0)+tt.get(1)+"</td>";
+            System.out.println("j: "+j);
+            
+        }
+        for(int k =0; k<tablaOrdenada.size()-1;k++){
+                 if(String.valueOf(tablaOrdenada.get(k).get(2)).equals(tt.get(1))){
+                    txt += "<td bgcolor=\"lightblue\">"+tt.get(0)+"</td>";
+                }else{
+                    txt += "<td bgcolor=\"lightblue\">--</td>";
+                }
+            }
+            txt += "</tr>\n";
     
         txt += "</table>\n" +
                 ">];\n" +
@@ -405,5 +489,32 @@ public class MetodoArbol {
         }catch(Exception ex){
             System.out.println("Error al generar la imagen JPG");
         }
+    }
+    
+    public int armandoTransicion(int item,int contador){
+        ArrayList<String> transiciones = new ArrayList<>();
+        boolean alerta = false;
+        for(ArrayList flw : tablaOrdenada){
+            if(flw.get(1).equals(item)){
+                System.out.println("flw"+flw);
+                String pivS = String.valueOf(flw.get(2));
+                for(ArrayList tt : tablaTransiciones){
+                    if(tt.get(1).equals(pivS)){
+                        tt.add(String.valueOf(flw.get(0)));
+                        alerta = true;
+                    }
+                }
+                if(!alerta){
+                    contador++;
+                    transiciones.add("S"+contador);
+                    transiciones.add(String.valueOf(flw.get(2)));
+                    transiciones.add(String.valueOf(flw.get(0)));
+                    tablaTransiciones.add(transiciones);
+                }
+                alerta = false;
+                return contador;
+            }
+        }
+        return contador;
     }
 }

@@ -259,7 +259,17 @@ public class interfazExRegan extends javax.swing.JFrame {
 
     private void itemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGuardarActionPerformed
         // TODO add your handling code here:
-      
+         JFileChooser file = new JFileChooser();
+        int seleccion = file.showSaveDialog(this);
+        
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = file.getSelectedFile();
+            
+            try(FileWriter fileW = new FileWriter(fichero)){
+                fileW.write(this.txtArchivo.getText());
+            } catch(IOException el){
+            }
+        }
     }//GEN-LAST:event_itemGuardarActionPerformed
 
     /**
